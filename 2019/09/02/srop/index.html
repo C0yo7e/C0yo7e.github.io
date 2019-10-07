@@ -1,114 +1,76 @@
 <!DOCTYPE html>
-<html>
-  <!-- Html Head Tag-->
-  <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content>
-  <meta name="author" content="C0yo7e">
-  <!-- Open Graph Data -->
-  <meta property="og:title" content="srop">
-  <meta property="og:description" content>
-  <meta property="og:site_name" content="The lair of C0yo7e">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="http://yoursite.com">
-  
-    <link rel="alternate" href="/atom.xml" title="The lair of C0yo7e" type="application/atom+xml">
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
   
   
-    <link rel="icon" href="/favicon.png">
   
-
-  <!-- Site Title -->
-  <title>The lair of C0yo7e</title>
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <!-- Custom CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    srop |
+    
+    The lair of C0yo7e</title>
   
-  <link rel="stylesheet" href="/css/style.light.css">
-
-  <!-- Google Analytics -->
+    <link rel="shortcut icon" href="/favicon.ico">
   
-
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
 </head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
 
-  <body>
-    <!-- Page Header -->
-
-
-<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-title with-background-image">
-          <p class="title">srop</p>
-          <p class="subtitle"></p>
-        </div>
-        <div class="site-menu with-background-image">
-          <ul>
-            
-              <li>
-                <a href="/">
-                  
-                  Home
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="/archives">
-                  
-                  Archives
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="https://github.com/<your-github-username>">
-                  
-                  Github
-                  
-                </a>
-              </li>
-            
-              <li>
-                <a href="mailto:<your-email-address>">
-                  
-                  Email
-                  
-                </a>
-              </li>
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<article>
-  <div class="container typo">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-info text-muted">
-          
-            <!-- Author -->
-            <span class="author info">By C0yo7e</span>
-          
-          <!-- Date -->
-          <span class="date-time info">On
-            <span class="date">2019-09-02</span>
-            <span class="time">14:07:12</span>
-          </span>
-          
-        </div>
-        <!-- Tags -->
+<article id="post-srop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-        <!-- Post Main Content -->
-        <div class="post-content">
-          <h2 id="Srop"><a href="#Srop" class="headerlink" title="Srop"></a>Srop</h2><p>Srop大概是一种，没有其他函数，找gadget会比较麻烦，无法利用来leak地址，借助signal handle机制’sigreturn’的系统调用，更改signal frame（这是一段代码）的一些寄存器的值做到系统调用，主要相关的寄存器有：rax（系统调用号）、rdi（存参）、rip（下一条指令）、rsp（栈顶），还有就是re_sigreturn（存sigreturn的系统调用号，32 位的 sigreturn 的调用号为 77，64 位的系统调用号为 15）</p>
+  
+    <h1 class="article-title" itemprop="name">
+      srop
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/09/02/srop/" class="article-date">
+  <time datetime="2019-09-02T15:51:52.000Z" itemprop="datePublished">2019-09-02</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Srop"><a href="#Srop" class="headerlink" title="Srop"></a>Srop</h2><p>Srop大概是一种，没有其他函数，找gadget会比较麻烦，无法利用来leak地址，借助signal handle机制’sigreturn’的系统调用，更改signal frame（这是一段代码）的一些寄存器的值做到系统调用，主要相关的寄存器有：rax（系统调用号）、rdi（存参）、rip（下一条指令）、rsp（栈顶），还有就是re_sigreturn（存sigreturn的系统调用号，32 位的 sigreturn 的调用号为 77，64 位的系统调用号为 15）</p>
 <p>偷偷搬运一下wiki里的图，这就是一个signal frame，最后执行完sigreturn之后会执行execve（‘/bin/sh’,0,0）<br><img src="/2019/09/02/srop/%E5%9B%BE%E7%89%871.png" alt></p>
 <a id="more"></a>
 
@@ -131,42 +93,172 @@
 <p>感觉srop就粗略的通过这题过了一下子，很多关于机制和寄存器的原理还是有点懵，底层知识还不扎实，要好好补补了</p>
 <p>相关参考链接:<br><a href="https://www.freebuf.com/articles/network/87447.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/network/87447.html</a>  srop的原理<br><a href="https://www.jianshu.com/p/b838a10b63c7" target="_blank" rel="noopener">https://www.jianshu.com/p/b838a10b63c7</a>  23R3F师傅的wp</p>
 
-        </div>
-      </div>
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ck1g1bl0o0007ekswetenlgoj"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
   </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/10/07/runtime-resolve/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            runtime_resolve
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/08/20/playfmt/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">suctf的两三题wp</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '',
+      clientSecret: '',
+      repo: '',
+      owner: 'C0yo7e',
+      admin: ['C0yo7e'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
 </article>
 
 
 
-    <!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <p class="copyright text-muted">
-          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
-          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
-        <p class="copyright text-muted">
-          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
-        </p>
-      </div>
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
     </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 The lair of C0yo7e</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
   </div>
 </footer>
 
+</main>
 
-    <!-- After Footer Scripts -->
-<script src="/js/highlight.pack.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function(event) {
-    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
-    codeBlocks.forEach(function(block, index) {
-      hljs.highlightBlock(block);
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="The lair of C0yo7e"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
     });
-  });
-</script>
+  </script>
 
-  </body>
+
+<script src="/js/ocean.js"></script>
+
+</body>
 </html>
-
