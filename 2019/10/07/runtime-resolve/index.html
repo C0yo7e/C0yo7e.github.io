@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <!-- Custom CSS -->
   
-  <link rel="stylesheet" href="/css/style.light.css">
+  <link rel="stylesheet" href="/css/style.dark.css">
 
   <!-- Google Analytics -->
   
@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-10-07</span>
-            <span class="time">13:52:43</span>
+            <span class="time">14:03:22</span>
           </span>
           
         </div>
@@ -108,11 +108,11 @@
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <hr>
-<p>title: runtime_resolve<br>date: 2019-10-07 12:23:05<br>tags:</p>
-<hr>
-<p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
+          <p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
 <p>控制程序执行 dl_resolve 函数<br>    给定 Link_map 以及 index 两个参数。<br>    当然我们可以直接给定 plt0 对应的汇编代码，这时，我们就只需要一个 index 就足够了。<br>控制 index 的大小，以便于指向自己所控制的区域，从而伪造一个指定的重定位表项。<br>伪造重定位表项，使得重定位表项所指的符号也在自己可以控制的范围内。<br>伪造符号内容，使得符号对应的名称也在自己可以控制的范围内。</p>
+<a id="more"></a>
+
+
 <p>对于此类题目：<br>关键点：</p>
 <ol>
 <li>.rel.plt表</li>
