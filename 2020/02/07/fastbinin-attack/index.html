@@ -71,6 +71,8 @@
 
       
         <p>就把wiki上的三道题稍微看了一下，了解了一下下fastbin attack，但是。。。依旧不算太清醒<br>好了，废话不多说，开始吧</p>
+<a id="more"></a>
+
 <h2 id="2014-hack-lu-oreo"><a href="#2014-hack-lu-oreo" class="headerlink" title="2014 hack.lu oreo"></a>2014 hack.lu oreo</h2><p>add<br><img src="/2020/02/07/fastbinin-attack/1.png" alt><br>里面的rifle name是从a288+25开始写，然后description是直接从a288处开始的，总共长度是56字节，地址占了四个字节，56-4 =52   description占25，name则占27<br>具体看汇编<br><img src="/2020/02/07/fastbinin-attack/2.png" alt><br>v1是pre指针     为eax+52，即最后四个字节为指针地址，而这个指针指向的是description。<br>我们可以写入的name有为56，存在溢出，可以覆写pre的地址</p>
 <p>show<br><img src="/2020/02/07/fastbinin-attack/3.png" alt><br>这里show的内容description是指针指向的地址<br>我们可以借此leak出libc</p>
 <p>massage<br><img src="/2020/02/07/fastbinin-attack/4.png" alt><br>进行更改的地方是a2a8里存着的地址指向的地方，利用此来get shell</p>
@@ -134,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ck6c9wip90000xwsw3fivmevj"
+      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ck6ca67pv0002c0swnq1yrh49"
          class="article-share-link">Share</a>
       
     </footer>
