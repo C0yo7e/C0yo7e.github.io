@@ -59,6 +59,69 @@
       
         
 
+<article id="post-arm的环境搭建-简单的例题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/07/arm的环境搭建-简单的例题/">arm的环境搭建+简单的例题</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/07/arm的环境搭建-简单的例题/" class="article-date">
+  <time datetime="2020-02-07T14:54:19.000Z" itemprop="datePublished">2020-02-07</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>关于arm的东西我好像已经拖了将近一个月了，不能再拖下去了，先记一些吧，之后我陆续补坑看看</p>
+<h3 id="arm环境搭建"><a href="#arm环境搭建" class="headerlink" title="arm环境搭建"></a>arm环境搭建</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#安装qemu</span><br><span class="line">apt-get install qemu</span><br><span class="line">#更新一下</span><br><span class="line">sudo apt-get update</span><br><span class="line">#安装32位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-arm-linux-gnueabi</span><br><span class="line">#运行32位的动态链接程序方法</span><br><span class="line">qemu-arm -L /usr/arm-linux-gnueabi ./文件</span><br><span class="line">#安装64位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu</span><br><span class="line">#运行64位的动态链接程序方法</span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu ./文件</span><br><span class="line">#安装gdb调试工具</span><br><span class="line">sudo apt-get install git gdb gdb-multiarch</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-link" href="/2020/02/07/arm的环境搭建-简单的例题/">Read More...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/07/arm的环境搭建-简单的例题/" data-id="ck6cfs3js0002c0swrrc7je4m"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-fastbinin-attack" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -103,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ck6ca67pv0002c0swnq1yrh49"
+      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ck6cfs3jw0004c0sw1ptsko6m"
          class="article-share-link">Share</a>
       
     </footer>
@@ -166,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ck6ca67q50007c0sw4l38miek"
+      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ck6cfs3k20009c0sww2cxwb10"
          class="article-share-link">Share</a>
       
     </footer>
@@ -229,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ck6ca67qc0009c0swij88bzvq"
+      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ck6cfs3k3000ac0sw917yo1wr"
          class="article-share-link">Share</a>
       
     </footer>
@@ -292,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ck6ca67q10006c0swk9t92lso"
+      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ck6cfs3k10008c0swaoedukq5"
          class="article-share-link">Share</a>
       
     </footer>
@@ -354,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/16/overwrite/" data-id="ck6ca67pz0005c0sw6onvsftb"
+      <a data-url="http://yoursite.com/2019/08/16/overwrite/" data-id="ck6cfs3k00007c0swggs44s05"
          class="article-share-link">Share</a>
       
     </footer>
@@ -416,7 +479,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/16/ssp/" data-id="ck6ca67q90008c0swgteit880"
+      <a data-url="http://yoursite.com/2019/08/16/ssp/" data-id="ck6cfs3k5000bc0sw1snmh57u"
          class="article-share-link">Share</a>
       
     </footer>
@@ -484,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/08/libc-csu/" data-id="ck6ca67py0004c0sw92ij5mjh"
+      <a data-url="http://yoursite.com/2019/07/08/libc-csu/" data-id="ck6cfs3jz0006c0swkib0otga"
          class="article-share-link">Share</a>
       
     </footer>
@@ -547,7 +610,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/08/ROP Emporium/" data-id="ck6ca67pm0000c0sw3r1ylghv"
+      <a data-url="http://yoursite.com/2019/07/08/ROP Emporium/" data-id="ck6cfs3jn0000c0swt78524mo"
          class="article-share-link">Share</a>
       
     </footer>

