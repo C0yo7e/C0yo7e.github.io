@@ -98,14 +98,14 @@
       
         <p>把ctf wiki里的unlink题简单的做了一下<br>先简单的记录一下，以后吃透了再回来好好的填填坑</p>
 <p>理解了一下unlink的操作<br>就是构造一个chunk，例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">0x1302000:	0x0000000000000000	0x0000000000000051</span><br><span class="line">0x1302010:	0x0000000000000000	0x0000000000000040  #fack_chunk（构造成一个free掉的样子）  0x51的chunk，就在他下面构造一个刚好可以填满这个chunk的new chunk，即-0x11</span><br><span class="line">0x1302020:	0x00000000006030d0	0x00000000006030d8</span><br><span class="line">0x1302030:	0x6161616161616161	0x6161616161616161</span><br><span class="line">0x1302040:	0x6161616161616161	0x6161616161616161</span><br><span class="line">0x1302050:	0x0000000000000040	0x00000000000000a0  #p位改成0，free下一个chunk之后会与上一个chunk合并</span><br><span class="line">0x1302060:	0x654420746f626f52	0x00000000006c6976</span><br><span class="line">0x1302070:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x1302080:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x1302090:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x13020a0:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x13020b0:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x13020c0:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x13020d0:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x13020e0:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x13020f0:	0x0000000000000000	0x0000000000020f11</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x1302000</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000051</span></span><br><span class="line"><span class="number">0x1302010</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000040</span>  <span class="comment">#fack_chunk（构造成一个free掉的样子）  0x51的chunk，就在他下面构造一个刚好可以填满这个chunk的new chunk，即-0x11</span></span><br><span class="line"><span class="number">0x1302020</span>:	<span class="number">0x00000000006030d0</span>	<span class="number">0x00000000006030d8</span></span><br><span class="line"><span class="number">0x1302030</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302040</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302050</span>:	<span class="number">0x0000000000000040</span>	<span class="number">0x00000000000000a0</span>  <span class="comment">#p位改成0，free下一个chunk之后会与上一个chunk合并</span></span><br><span class="line"><span class="number">0x1302060</span>:	<span class="number">0x654420746f626f52</span>	<span class="number">0x00000000006c6976</span></span><br><span class="line"><span class="number">0x1302070</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302080</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302090</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020a0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020b0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020c0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020d0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020e0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020f0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000020f11</span></span><br></pre></td></tr></table></figure>
         
           <a class="article-more-link" href="/2020/02/18/unlink/">Read More...</a>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/18/unlink/" data-id="ck6swyptu000c5wswt3cyqgbo"
+      <a data-url="http://yoursite.com/2020/02/18/unlink/" data-id="ck6uszte8000a3wsw88fsnakv"
          class="article-share-link">Share</a>
       
     </footer>
@@ -168,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/arm的环境搭建-简单的例题/" data-id="ck6swypt300005wswd2kowa7y"
+      <a data-url="http://yoursite.com/2020/02/07/arm的环境搭建-简单的例题/" data-id="ck6usztce00003wswahwd4bp6"
          class="article-share-link">Share</a>
       
     </footer>
@@ -230,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ck6swyptf00065wsw9awv5pkv"
+      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ck6usztdp00023wsw54cwbfi0"
          class="article-share-link">Share</a>
       
     </footer>
@@ -293,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ck6swyptn00095wswfu8qth7a"
+      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ck6uszte600093wsw0e20psxq"
          class="article-share-link">Share</a>
       
     </footer>
@@ -356,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ck6swyptt000b5wswgaiv3wjp"
+      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ck6uszte9000b3wswjn2i93hn"
          class="article-share-link">Share</a>
       
     </footer>
@@ -419,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ck6swyptg00075wswhsrs1a85"
+      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ck6uszte300073wsw2ert9msv"
          class="article-share-link">Share</a>
       
     </footer>
@@ -481,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/16/overwrite/" data-id="ck6swyptl00085wswl2qa9gbq"
+      <a data-url="http://yoursite.com/2019/08/16/overwrite/" data-id="ck6uszte500083wswo6q2srts"
          class="article-share-link">Share</a>
       
     </footer>
@@ -543,7 +543,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/16/ssp/" data-id="ck6swyptr000a5wsw4dcmk43u"
+      <a data-url="http://yoursite.com/2019/08/16/ssp/" data-id="ck6uszteb000c3wsw52wyqlqu"
          class="article-share-link">Share</a>
       
     </footer>
@@ -611,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/08/libc-csu/" data-id="ck6swyptc00045wsweotxxv7h"
+      <a data-url="http://yoursite.com/2019/07/08/libc-csu/" data-id="ck6usztdv00043wswnz7odbuq"
          class="article-share-link">Share</a>
       
     </footer>
@@ -674,7 +674,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/08/ROP Emporium/" data-id="ck6swypt900025wsw1g6xhxjg"
+      <a data-url="http://yoursite.com/2019/07/08/ROP Emporium/" data-id="ck6uszte100063wswu22jeuey"
          class="article-share-link">Share</a>
       
     </footer>
