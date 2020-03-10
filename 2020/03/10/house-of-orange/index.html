@@ -72,6 +72,7 @@
       
         <p>其实之前从来没碰到house of orange的题，然后在想学io_file的时候看到有提到这个，就去了解了一下house of orange的原理。</p>
 <h3 id="对于house-of-orange操作的理解（glibc2-23）"><a href="#对于house-of-orange操作的理解（glibc2-23）" class="headerlink" title="对于house of orange操作的理解（glibc2.23）"></a>对于house of orange操作的理解（glibc2.23）</h3><p>大体上是，没有<font color="red">free</font>函数，通过<font color="red">改写top chunk</font>，使top chunk的大小不能满足我们要malloc的大小，则malloc后，原来的top chunk会被释放，并置入到unsorted bin的队列。这样就可以到达不通过free也能把chunk写到unsorted bin的队列里面的目的了。</p>
+<a id="more"></a>
 <p>在<code>_int_malloc</code>函数中，会依次检验 fastbin、small bins、unsorted bin、large bins 是否可以满足分配要求，如果都不符合，接下来_int_malloc函数会试图使用 top chunk。</p>
 <p>如果top chunk也无法满足的话，会执行以下的代码</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Otherwise, relay to handle system-dependent cases</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">void</span> *p = sysmalloc(nb, av);</span><br><span class="line">      <span class="keyword">if</span> (p != <span class="literal">NULL</span> &amp;&amp; __builtin_expect (perturb_byte, <span class="number">0</span>))</span><br><span class="line">        alloc_perturb (p, bytes);</span><br><span class="line">      <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -197,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/house-of-orange/" data-id="ck7lhp1yp00028gswwnh5yun4"
+      <a data-url="http://yoursite.com/2020/03/10/house-of-orange/" data-id="ck7lht0ex0006d4swtrjbcpea"
          class="article-share-link">Share</a>
       
     </footer>
