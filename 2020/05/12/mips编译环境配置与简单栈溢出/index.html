@@ -76,6 +76,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">coyote@ubuntu:~/buildroot-2020.02.1$ make qemu_mips32r2el_malta_defconfig</span><br><span class="line">coyote@ubuntu:~/buildroot-2020.02.1$ make</span><br></pre></td></tr></table></figure>
 
 <p>make qemu…那个命令就是配置相对应的环境，就不用手动<code>make menuconfig</code> 去设置了。</p>
+<a id="more"></a>
 <p>进入menuconfig界面之后选择第一项<code>Target Architecture</code>，改成<code>MIPS（little endian）</code>（默认编译小端程序），另外，选择<code>Toolchain</code>，将<code>Kernel Headers</code>的Linux版本改成自己主机的Linux版本（因为我们编译出的MIPS交叉工具是需要在我们的主机上运行的）</p>
 <p>之后make就好了（过程可能会很漫长，耐心等吧<br>编译完成之后，在<code>buildroot/output/host/bin</code><br>下就有<code>mipsel-linux-gcc</code>了，我们就可以通过它编译了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/buildroot-2020.02.1/output/host/bin/mipsel-linux-gcc test.c -o test -static</span><br></pre></td></tr></table></figure>
@@ -153,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="cka3qx2d400058gswn0v55d91"
+      <a data-url="http://yoursite.com/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="cka3r5egl0005lkswyb7bcb1a"
          class="article-share-link">Share</a>
       
     </footer>
