@@ -59,6 +59,74 @@
       
         
 
+<article id="post-libc-csu" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/07/08/libc-csu/">libc_csu</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/07/08/libc-csu/" class="article-date">
+  <time datetime="2019-07-08T15:15:17.000Z" itemprop="datePublished">2019-07-08</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="libc-csu"><a href="#libc-csu" class="headerlink" title="_libc_csu"></a><em>_libc_csu</em></h2><p>1、Ret2csu</p>
+<p>这是一个64位的题，开了NX，照常，进ida里瞄瞄它的大体结构是怎样的。<br>Emmm真是一个异常简洁的main函数</p>
+<p><img src="/2019/07/08/libc-csu/%E5%9B%BE%E7%89%871.png" alt></p>
+<p>我们发现它有个pwnme函数哦，那就点进去看一下</p>
+<p><img src="/2019/07/08/libc-csu/%E5%9B%BE%E7%89%872.png" alt></p>
+<p>它里面说了ret2win 的第三个参数（rdx）必须为“0xdeadcafebabebeef”，异或出来是“/bin/cat”，先记住它。然后它还有一堆的赋值为0的语句，手欠点开来看，发现它把got表全置0了，那么我们就完全不用考虑got表。</p>
+<p><img src="/2019/07/08/libc-csu/%E5%9B%BE%E7%89%873.png" alt></p>
+        
+          <a class="article-more-link" href="/2019/07/08/libc-csu/">Read More...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/08/libc-csu/" data-id="cka3qx2di00098gsw1loq1nj8"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-ROP Emporium" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -104,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/08/ROP Emporium/" data-id="ck7lijv9f0000wkswnfxj25by"
+      <a data-url="http://yoursite.com/2019/07/08/ROP Emporium/" data-id="cka3qx2d800078gswfx473br7"
          class="article-share-link">Share</a>
       
     </footer>
