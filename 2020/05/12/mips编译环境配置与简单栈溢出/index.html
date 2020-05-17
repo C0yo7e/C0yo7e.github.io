@@ -92,12 +92,12 @@
 <p>点击这个之后，可以在idapython框里面输入mipsrop的命令，主要如下</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mipsrop.stackfinder() <span class="comment"># 寻找栈数据可控的 rop，建立和 a0、a1 寄存器的关系</span></span><br><span class="line">mipsrop.summary() <span class="comment"># 列出所有的可用 rop</span></span><br><span class="line">mipsrop.system() <span class="comment"># 寻找命令执行的的rop</span></span><br><span class="line">mipsrop.find(xxx) <span class="comment"># 查找 find 函数参数的 rop，类似正则匹配</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="mips反编译"><a href="#mips反编译" class="headerlink" title="mips反编译"></a>mips反编译</h5><p>这真是个令人头秃的东西</p>
+<h3 id="mips反编译"><a href="#mips反编译" class="headerlink" title="mips反编译"></a>mips反编译</h3><p>这真是个令人头秃的东西</p>
 <p>mips反编译有三个：</p>
 <blockquote>
 <p>retdec<br>ghidra<br>jeb-mips</p>
 </blockquote>
-<h6 id="ida-retdec-插件"><a href="#ida-retdec-插件" class="headerlink" title="ida retdec 插件"></a>ida retdec 插件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">retdec-idaplugin：https://github.com/avast/retdec-idaplugin/releases</span><br><span class="line">retdec：https://github.com/avast/retdec/releases</span><br></pre></td></tr></table></figure>
+<h4 id="ida-retdec-插件"><a href="#ida-retdec-插件" class="headerlink" title="ida retdec 插件"></a>ida retdec 插件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">retdec-idaplugin：https://github.com/avast/retdec-idaplugin/releases</span><br><span class="line">retdec：https://github.com/avast/retdec/releases</span><br></pre></td></tr></table></figure>
 
 <p>步骤：</p>
 <ul>
@@ -109,11 +109,11 @@
 <p>这个反编译出来的代码真的好丑啊！不知道是不是我的问题，它真的就是c文件，只能从上往下看。<br><img src="/2020/05/12/mips编译环境配置与简单栈溢出/%E5%9B%BE%E7%89%871.png" alt></p>
 <p>还不如直接<code>python /path/to/retdec-decompiler.py test</code> 编译出c文件之后在vs里面看，至少还有代码高亮。</p>
 <p>如果有大佬的retdec可以反编译得很方便的话就教教我吧！</p>
-<h6 id="jeb-mips"><a href="#jeb-mips" class="headerlink" title="jeb-mips"></a>jeb-mips</h6><p>由于实在忍不了retdec的简略，就尝试了jeb-mips</p>
+<h4 id="jeb-mips"><a href="#jeb-mips" class="headerlink" title="jeb-mips"></a>jeb-mips</h4><p>由于实在忍不了retdec的简略，就尝试了jeb-mips</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jeb-mips：https://www.pnfsoftware.com/jeb/demomips</span><br></pre></td></tr></table></figure>
 
 <p>解压之后windows下就直接点<code>jeb_wincon.bat</code>运行（不过不知道是不是我电脑的问题还是java版本的问题，点开之后运行个一分钟就会自动退出）<br>大佬的Mac是可以运行的，我的win挣扎了一个下午也没解决这个问题，最后安在了linux下<br><img src="/2020/05/12/mips编译环境配置与简单栈溢出/%E5%9B%BE%E7%89%872.png" alt></p>
-<h6 id="Ghidra"><a href="#Ghidra" class="headerlink" title="Ghidra"></a>Ghidra</h6><p>我不是很熟jeb的操作，data变code我都很迷茫，右键<code>disassemble</code>好像没有作用（这个可能是我的问题，和软件无关）所以我又去找了ghidra下载</p>
+<h4 id="Ghidra"><a href="#Ghidra" class="headerlink" title="Ghidra"></a>Ghidra</h4><p>我不是很熟jeb的操作，data变code我都很迷茫，右键<code>disassemble</code>好像没有作用（这个可能是我的问题，和软件无关）所以我又去找了ghidra下载</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ghidra（要梯子）：https://ghidra-sre.org/ghidra_9.0.4_PUBLIC_20190516.zip</span><br></pre></td></tr></table></figure>
 
 <p>解压之后直接点<code>ghidraRun.bat</code>运行，好像是会新建一个工程，然后在<code>file-&gt;import file</code>选择你想反编译的文件导入工程，文件就会显示在窗口里，如图<br><img src="/2020/05/12/mips编译环境配置与简单栈溢出/%E5%9B%BE%E7%89%874.png" alt></p>
@@ -182,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckaaiy3090002v8swditgaj4g"
+      <a data-url="http://yoursite.com/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckaaj2fj80006kwswf5dq375x"
          class="article-share-link">Share</a>
       
     </footer>
