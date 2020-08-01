@@ -59,7 +59,7 @@
       
         
 
-<article id="io-IO FILE-leakaddr" class="article article-type-io" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-IO-FILE-leakaddr" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -67,7 +67,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/01/IO FILE-leakaddr/">FILE-leakaddr</a>
+      <a class="article-title" href="/2020/08/01/IO-FILE-leakaddr/">IO_FILE-leakaddr</a>
     </h2>
   
   
@@ -80,8 +80,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/08/01/IO FILE-leakaddr/" class="article-date">
-  <time datetime="2020-08-01T13:58:07.000Z" itemprop="datePublished">2020-08-01</time>
+        <a href="/2020/08/01/IO-FILE-leakaddr/" class="article-date">
+  <time datetime="2020-08-01T14:01:50.000Z" itemprop="datePublished">2020-08-01</time>
 </a>
         
       </div>
@@ -112,14 +112,14 @@
 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//glibc/libio/libio.h</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _IO_NO_WRITES         0x0008</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _IO_CURRENTLY_PUTTING 0x0800</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _IO_IS_APPENDING      0x1000</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="关于flag的绕过："><a href="#关于flag的绕过：" class="headerlink" title="关于flag的绕过："></a>关于flag的绕过：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">综上，我们需要绕过的有：</span><br><span class="line">-  f-&gt;_flags &amp; _IO_NO_WRITES = 0</span><br><span class="line">-  f-&gt;_flags &amp; _IO_CURRENTLY_PUTTING = 1</span><br><span class="line">-  fp-&gt;_IO_read_end = fp-&gt;_IO_write_base 或者 _flag &amp; IO_IS_APPENDING = 1</span><br><span class="line">-  _fileno = 1</span><br><span class="line">-  _IO_write_base是我们传输给_IO_SYSWRITE的参数，即是我们leak出来的地址</span><br><span class="line">-  _IO_write_base与_IO_write_ptr的差是write出来的字节数，所以我们要覆盖base的低位使之变小</span><br></pre></td></tr></table></figure>
+<h6 id="关于flag的绕过："><a href="#关于flag的绕过：" class="headerlink" title="关于flag的绕过："></a>关于flag的绕过：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">综上，我们需要绕过的有：</span><br><span class="line">-  f-&gt;_flags &amp; _IO_NO_WRITES = 0</span><br><span class="line">-  f-&gt;_flags &amp; _IO_CURRENTLY_PUTTING = 1</span><br><span class="line">-  fp-&gt;_IO_read_end = fp-&gt;_IO_write_base 或者 _flag &amp; IO_IS_APPENDING = 1</span><br><span class="line">-  _fileno = 1</span><br><span class="line">-  _IO_write_base是我们传输给_IO_SYSWRITE的参数，即是我们leak出来的地址</span><br><span class="line">-  _IO_write_base与_IO_write_ptr的差是write出来的字节数，所以我们要覆盖base的低位使之变小</span><br></pre></td></tr></table></figure>
 
 <p>_flags里面包含<code>_IO_IS_APPENDING</code>，<code>_IO_IS_APPENDING</code>的定义为<code>#define _IO_IS_APPENDING 0x1000</code>，这样就不会走后面的这个判断而直接执行到<code>_IO_SYSWRITE</code>了<br>按理是满足接下来这些条件就可以了的：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment">#_IO_new_file_xsputn (if ((f-&gt;_flags &amp; _IO_LINE_BUF) &amp;&amp; (f-&gt;_flags &amp; _IO_CURRENTLY_PUTTING)))</span></span><br><span class="line">&gt; f-&gt;flag &amp; 0xa00 &gt;0;</span><br><span class="line">&gt; <span class="comment">#_IO_new_file_overflow f-&gt;_flags &amp; _IO_NO_WRITES</span></span><br><span class="line">&gt; f-&gt;_flags &amp; 0x8 = 0;</span><br><span class="line">&gt; <span class="comment">#new_do_write if (fp-&gt;_flags &amp; _IO_IS_APPENDING)</span></span><br><span class="line">&gt; f-&gt;flag &amp; 0x1000 == 1;(&gt;0)</span><br><span class="line">&gt; f-&gt;write_base != f-&gt;write_ptr;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">flag = 0xfbad0000</span><br><span class="line">flag &amp;= ~0x008 （最后一位）</span><br><span class="line">flag |= 0x0800 （倒数三位） 不能是奇数</span><br><span class="line">flag |= 0x1000 （倒数第四位） 不能是偶数</span><br><span class="line"></span><br><span class="line">--&gt; flag = 0xfbad1800</span><br></pre></td></tr></table></figure>
 
-<h5 id="不改flag的绕过："><a href="#不改flag的绕过：" class="headerlink" title="不改flag的绕过："></a>不改flag的绕过：</h5><p>要使<code>fp-&gt;_IO_read_end != fp-&gt;_IO_write_base</code>不成立才能执行write</p>
+<h6 id="不改flag的绕过："><a href="#不改flag的绕过：" class="headerlink" title="不改flag的绕过："></a>不改flag的绕过：</h6><p>要使<code>fp-&gt;_IO_read_end != fp-&gt;_IO_write_base</code>不成立才能执行write</p>
 <p>所以要满足的条件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_IO_write_base指向想要泄露的地方。</span><br><span class="line">_IO_write_ptr指向泄露结束的地址。//两者要有差距</span><br><span class="line">_IO_read_end等于_IO_write_base以绕过多余的代码。</span><br><span class="line"></span><br><span class="line">//满足这三个条件，可实现任意读。</span><br></pre></td></tr></table></figure>
 
@@ -135,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/01/IO FILE-leakaddr/" data-id="ckdbq3dda0000lgswg5bdaxmn"
+      <a data-url="http://yoursite.com/2020/08/01/IO-FILE-leakaddr/" data-id="ckdbq6hh00000sgsw1konxbgq"
          class="article-share-link">Share</a>
       
     </footer>
@@ -202,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckdbq3ddp0005lgswocnxkrev"
+      <a data-url="http://yoursite.com/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckdbq6hhk0009sgswdqqlsnwg"
          class="article-share-link">Share</a>
       
     </footer>
@@ -265,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/house-of-orange/" data-id="ckdbq3ddl0004lgswgl8u0cdk"
+      <a data-url="http://yoursite.com/2020/03/10/house-of-orange/" data-id="ckdbq6hh80004sgswjrhgiuyu"
          class="article-share-link">Share</a>
       
     </footer>
@@ -329,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/18/unlink/" data-id="ckdbq3dew000elgsw7r65lw2i"
+      <a data-url="http://yoursite.com/2020/02/18/unlink/" data-id="ckdbq6hhz000fsgswgqju3j31"
          class="article-share-link">Share</a>
       
     </footer>
@@ -392,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckdbq3ddg0002lgsw26yl6ekf"
+      <a data-url="http://yoursite.com/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckdbq6hhd0007sgsw1xdnhbi2"
          class="article-share-link">Share</a>
       
     </footer>
@@ -454,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ckdbq3ddj0003lgswwb177c1t"
+      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ckdbq6hhb0006sgswhczpnyd2"
          class="article-share-link">Share</a>
       
     </footer>
@@ -517,7 +517,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ckdbq3deo000blgswq86qrc04"
+      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ckdbq6hhu000csgswzjgeltfx"
          class="article-share-link">Share</a>
       
     </footer>
@@ -580,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ckdbq3dez000flgswvqwlz7cr"
+      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ckdbq6hhw000dsgswreyac0xr"
          class="article-share-link">Share</a>
       
     </footer>
@@ -643,7 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ckdbq3dem0009lgswxega7m6n"
+      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ckdbq6hhm000asgswx8uynb85"
          class="article-share-link">Share</a>
       
     </footer>
@@ -705,7 +705,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/16/overwrite/" data-id="ckdbq3dej0007lgswirpx1wkq"
+      <a data-url="http://yoursite.com/2019/08/16/overwrite/" data-id="ckdbq6hhr000bsgswcngg8wyw"
          class="article-share-link">Share</a>
       
     </footer>
