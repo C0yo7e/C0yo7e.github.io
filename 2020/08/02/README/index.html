@@ -7,7 +7,6 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    All tags |
     
     The lair of C0yo7e</title>
   
@@ -25,26 +24,27 @@
   <section class="outer">
   
 
-<article id="page-" class="article article-type-page" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-README" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
-      <header class="article-header">
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/02/README/" class="article-date">
+  <time datetime="2020-08-01T17:42:01.571Z" itemprop="datePublished">2020-08-02</time>
+</a>
         
-  
-    <h1 class="article-title" itemprop="name">
-      All tags
-    </h1>
-  
-  
-
-
-
-
-      </header>
+      </div>
     
 
     
+      
+    <div class="tocbot"></div>
+
+
+
+
 
     
 
@@ -55,11 +55,11 @@
       
 
       
-        
+        <h1 id="gitalk"><a href="#gitalk" class="headerlink" title="gitalk"></a>gitalk</h1><h1 id="gitalk-1"><a href="#gitalk-1" class="headerlink" title="gitalk"></a>gitalk</h1>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/tags/index.html" data-id="ckdbynp4w0004bkswcgiyirky"
+      <a data-url="http://yoursite.com/2020/08/02/README/" data-id="ckdbynp4x0005bkswthe012qp"
          class="article-share-link">Share</a>
       
     </footer>
@@ -68,8 +68,40 @@
 
   
     
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/01/largebin-attack-glibc2-23/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">largebin_attack-glibc2.23</div>
+      </a>
+    
+  </nav>
+
 
   
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '57453e2505e1523b1d78',
+      clientSecret: 'c9d2109f4649be7dca5ef5622d85e38608a7cd1e',
+      repo: 'content',
+      owner: 'C0yo7e',
+      admin: ['C0yo7e'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
 
   
 
@@ -97,8 +129,8 @@
 
 </main>
 
-  <aside class="sidebar">
-    
+<aside class="sidebar sidebar-specter">
+  
     <button class="navbar-toggle"></button>
 <nav class="navbar">
   
@@ -163,6 +195,21 @@
   <script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
 
 
 <script src="/js/ocean.js"></script>
