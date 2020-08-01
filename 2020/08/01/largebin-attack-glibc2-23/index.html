@@ -7,6 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
+    largebin_attack-glibc2.23 |
     
     The lair of C0yo7e</title>
   
@@ -21,43 +22,8 @@
 </html>
 <body>
 <main class="content">
-  <section class="jumbotron">
-  <div class="video">
-    
-      <div class="video-frame">
-        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-      </div>
-    
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
-             poster="/images/ocean/ocean.png" x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">The lair of C0yo7e</a></h1>
-      <p></p>
-      <div><img src="/images/time.png" class="brand" alt="The lair of C0yo7e"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
-  </div>
-</section>
-
-<div id="landingpage">
   <section class="outer">
-  <article class="articles">
-    
-    <h1 class="page-type-title"></h1>
-
-    
-      
-        
+  
 
 <article id="post-largebin-attack-glibc2-23" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
@@ -66,9 +32,9 @@
       <header class="article-header">
         
   
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/01/largebin-attack-glibc2-23/">largebin_attack-glibc2.23</a>
-    </h2>
+    <h1 class="article-title" itemprop="name">
+      largebin_attack-glibc2.23
+    </h1>
   
   
 
@@ -86,6 +52,14 @@
         
       </div>
     
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
 
     
 
@@ -215,6 +189,41 @@
   </div>
 
   
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/01/IO-FILE-leakaddr/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">IO_FILE-leakaddr</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '',
+      clientSecret: '',
+      repo: '',
+      owner: 'C0yo7e',
+      admin: ['C0yo7e'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
 
   
 
@@ -222,594 +231,7 @@
 
 
 
-      
-        
-
-<article id="post-IO-FILE-leakaddr" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/01/IO-FILE-leakaddr/">IO_FILE-leakaddr</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/01/IO-FILE-leakaddr/" class="article-date">
-  <time datetime="2020-08-01T14:01:50.000Z" itemprop="datePublished">2020-08-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="任意读原理"><a href="#任意读原理" class="headerlink" title="任意读原理"></a>任意读原理</h3><p>stderr、stdout、stdin这三个函数拥有IO_FILE结构体，要利用IO_FILE实现任意读，就要利用到stdout。<br>首先，puts和write函数的执行，都会通过 <code>_IO_new_file_overflow</code> 这个函数最后执行 <code>_IO_overflow</code></p>
-<blockquote>
-<p><strong>puts</strong>:  <em>_IO_puts</em> –&gt; <em>_IO_sputn</em> –&gt; <em>_IO_new_file_xsputn</em> –&gt; <em>_IO_new_file_overflow</em> –&gt; <em>_IO_do_write</em> –&gt; <em>new_do_write</em> –&gt; <em>_IO_SYSWRITE</em></p>
-<p><strong>fwrite</strong>: <em>_IO_fwrite</em> –&gt; <em>_IO_sputn</em> –&gt; <em>_IO_new_file_xsputn</em> –&gt; <em>_IO_new_file_overflow</em> –&gt; <em>_IO_do_write</em> –&gt; <em>new_do_write</em> –&gt; <em>_IO_SYSWRITE</em></p>
-</blockquote>
-<p>_IO_new_file_xsputn的源码：</p>
-        
-          <a class="article-more-link" href="/2020/08/01/IO-FILE-leakaddr/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/08/01/IO-FILE-leakaddr/" data-id="ckdbs958800006cswdn05lxj9"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-mips编译环境配置与简单栈溢出" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/05/12/mips编译环境配置与简单栈溢出/">mips编译环境配置与简单栈溢出</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/05/12/mips编译环境配置与简单栈溢出/" class="article-date">
-  <time datetime="2020-05-12T10:00:33.000Z" itemprop="datePublished">2020-05-12</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h2 id="环境编译"><a href="#环境编译" class="headerlink" title="环境编译"></a>环境编译</h2><p>首先就是搭一下编译环境，（==最好选16的ubuntu==，我曾经觉得18的Ubuntu长得好看，然后在上面搭了一天的环境之后发现，并不能动态调试，然后重新在16里又再搭了一天）</p>
-<h3 id="buildroot"><a href="#buildroot" class="headerlink" title="buildroot"></a>buildroot</h3><p>下载：<a href="https://buildroot.org/download" target="_blank" rel="noopener">buildroot</a></p>
-<p>解压之后，configs里面有一个<code>qemu_mips32r2el_malta_defconfig</code>这样的配置，可以进去找找看有没有，我们回到主目录，直接<code>make qemu_mips32r2el_malta_defconfig</code></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">coyote@ubuntu:~/buildroot<span class="number">-2020.02</span><span class="number">.1</span>$ make qemu_mips32r2el_malta_defconfig</span><br><span class="line">coyote@ubuntu:~/buildroot<span class="number">-2020.02</span><span class="number">.1</span>$ make</span><br></pre></td></tr></table></figure>
-
-<p>make qemu…那个命令就是配置相对应的环境，就不用手动<code>make menuconfig</code> 去设置了。</p>
-        
-          <a class="article-more-link" href="/2020/05/12/mips编译环境配置与简单栈溢出/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckdbs958w000a6cswxo3aj6je"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-house-of-orange" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/house-of-orange/">house_of_orange</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/house-of-orange/" class="article-date">
-  <time datetime="2020-03-10T03:44:04.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>其实之前从来没碰到house of orange的题，然后在想学io_file的时候看到有提到这个，就去了解了一下house of orange的原理。</p>
-<h3 id="对于house-of-orange操作的理解（glibc2-23）"><a href="#对于house-of-orange操作的理解（glibc2-23）" class="headerlink" title="对于house of orange操作的理解（glibc2.23）"></a>对于house of orange操作的理解（glibc2.23）</h3><p>大体上是，没有<font color="red">free</font>函数，通过<font color="red">改写top chunk</font>，使top chunk的大小不能满足我们要malloc的大小，则malloc后，原来的top chunk会被释放，并置入到unsorted bin的队列。这样就可以到达不通过free也能把chunk写到unsorted bin的队列里面的目的了。</p>
-        
-          <a class="article-more-link" href="/2020/03/10/house-of-orange/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/house-of-orange/" data-id="ckdbs958j00066cswoae04ym2"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-unlink" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/18/unlink/">unlink</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/18/unlink/" class="article-date">
-  <time datetime="2020-02-18T14:44:29.000Z" itemprop="datePublished">2020-02-18</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>把ctf wiki里的unlink题简单的做了一下<br>先简单的记录一下，以后吃透了再回来好好的填填坑</p>
-<p>理解了一下unlink的操作<br>就是构造一个chunk，例如</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x1302000</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000051</span></span><br><span class="line"><span class="number">0x1302010</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000040</span>  <span class="comment">#fack_chunk（构造成一个free掉的样子）  0x51的chunk，就在他下面构造一个刚好可以填满这个chunk的new chunk，即-0x11</span></span><br><span class="line"><span class="number">0x1302020</span>:	<span class="number">0x00000000006030d0</span>	<span class="number">0x00000000006030d8</span></span><br><span class="line"><span class="number">0x1302030</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302040</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302050</span>:	<span class="number">0x0000000000000040</span>	<span class="number">0x00000000000000a0</span>  <span class="comment">#p位改成0，free下一个chunk之后会与上一个chunk合并</span></span><br><span class="line"><span class="number">0x1302060</span>:	<span class="number">0x654420746f626f52</span>	<span class="number">0x00000000006c6976</span></span><br><span class="line"><span class="number">0x1302070</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302080</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302090</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020a0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020b0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020c0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020d0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020e0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020f0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000020f11</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-link" href="/2020/02/18/unlink/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/18/unlink/" data-id="ckdbs9594000f6csw09ihsax2"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-arm的环境搭建-简单的例题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/07/arm的环境搭建-简单的例题/">arm的环境搭建+简单的例题</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/07/arm的环境搭建-简单的例题/" class="article-date">
-  <time datetime="2020-02-07T14:54:19.000Z" itemprop="datePublished">2020-02-07</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>关于arm的东西我好像已经拖了将近一个月了，不能再拖下去了，先记一些吧，之后我陆续补坑看看</p>
-<h2 id="arm环境搭建"><a href="#arm环境搭建" class="headerlink" title="arm环境搭建"></a>arm环境搭建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#安装qemu</span><br><span class="line">apt-get install qemu</span><br><span class="line">#更新一下</span><br><span class="line">sudo apt-get update</span><br><span class="line">#安装32位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-arm-linux-gnueabi</span><br><span class="line">#运行32位的动态链接程序方法</span><br><span class="line">qemu-arm -L /usr/arm-linux-gnueabi ./文件</span><br><span class="line">#安装64位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu</span><br><span class="line">#运行64位的动态链接程序方法</span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu ./文件</span><br><span class="line">#安装gdb调试工具</span><br><span class="line">sudo apt-get install git gdb gdb-multiarch</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-link" href="/2020/02/07/arm的环境搭建-简单的例题/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckdbs958d00026csw8r0wmkaw"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-fastbinin-attack" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/07/fastbinin-attack/">fastbinin_attack</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/07/fastbinin-attack/" class="article-date">
-  <time datetime="2020-02-07T13:59:05.000Z" itemprop="datePublished">2020-02-07</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>就把wiki上的三道题稍微看了一下，了解了一下下fastbin attack，但是。。。依旧不算太清醒<br>好了，废话不多说，开始吧</p>
-        
-          <a class="article-more-link" href="/2020/02/07/fastbinin-attack/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/07/fastbinin-attack/" data-id="ckdbs958g00046csw331ur5fy"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-runtime-resolve" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/10/07/runtime-resolve/">runtime_resolve</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/10/07/runtime-resolve/" class="article-date">
-  <time datetime="2019-10-07T04:23:05.000Z" itemprop="datePublished">2019-10-07</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
-<p>控制程序执行 dl_resolve 函数<br>    给定 Link_map 以及 index 两个参数。<br>    当然我们可以直接给定 plt0 对应的汇编代码，这时，我们就只需要一个 index 就足够了。<br>控制 index 的大小，以便于指向自己所控制的区域，从而伪造一个指定的重定位表项。<br>伪造重定位表项，使得重定位表项所指的符号也在自己可以控制的范围内。<br>伪造符号内容，使得符号对应的名称也在自己可以控制的范围内。</p>
-        
-          <a class="article-more-link" href="/2019/10/07/runtime-resolve/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/07/runtime-resolve/" data-id="ckdbs9591000c6csw8w4nxavr"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-srop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/09/02/srop/">srop</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/09/02/srop/" class="article-date">
-  <time datetime="2019-09-02T15:51:52.000Z" itemprop="datePublished">2019-09-02</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h2 id="Srop"><a href="#Srop" class="headerlink" title="Srop"></a>Srop</h2><p>Srop大概是一种，没有其他函数，找gadget会比较麻烦，无法利用来leak地址，借助signal handle机制’sigreturn’的系统调用，更改signal frame（这是一段代码）的一些寄存器的值做到系统调用，主要相关的寄存器有：rax（系统调用号）、rdi（存参）、rip（下一条指令）、rsp（栈顶），还有就是re_sigreturn（存sigreturn的系统调用号，32 位的 sigreturn 的调用号为 77，64 位的系统调用号为 15）</p>
-<p>偷偷搬运一下wiki里的图，这就是一个signal frame，最后执行完sigreturn之后会执行execve（‘/bin/sh’,0,0）<br><img src="/2019/09/02/srop/%E5%9B%BE%E7%89%871.png" alt></p>
-        
-          <a class="article-more-link" href="/2019/09/02/srop/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/srop/" data-id="ckdbs9592000d6cswc1z35t65"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-playfmt" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/08/20/playfmt/">suctf的两三题wp</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/08/20/playfmt/" class="article-date">
-  <time datetime="2019-08-20T14:58:39.000Z" itemprop="datePublished">2019-08-20</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>这次suctf我参与了的好像就三道题吧，还是和队友以及大佬商讨之后才弄出来的，发现自己真的太菜了</p>
-<p>以下附上超级简单题的一些思路，当做给自己的记录吧</p>
-        
-          <a class="article-more-link" href="/2019/08/20/playfmt/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/20/playfmt/" data-id="ckdbs958z000b6cswzxmhbzlt"
-         class="article-share-link">Share</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-  </article>
-  
-
-  
-    <nav class="page-nav">
-      
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next page</a>
-    </nav>
-  
 </section>
-</div>
-
   <footer class="footer">
   <div class="outer">
     <div class="float-right">
@@ -829,8 +251,8 @@
 
 </main>
 
-  <aside class="sidebar">
-    
+<aside class="sidebar sidebar-specter">
+  
     <button class="navbar-toggle"></button>
 <nav class="navbar">
   
@@ -895,6 +317,21 @@
   <script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
 
 
 <script src="/js/ocean.js"></script>
