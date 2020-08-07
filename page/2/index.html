@@ -59,6 +59,71 @@
       
         
 
+<article id="post-srop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/09/02/srop/">srop</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/09/02/srop/" class="article-date">
+  <time datetime="2019-09-02T15:51:52.000Z" itemprop="datePublished">2019-09-02</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Srop"><a href="#Srop" class="headerlink" title="Srop"></a>Srop</h2><p>Srop大概是一种，没有其他函数，找gadget会比较麻烦，无法利用来leak地址，借助signal handle机制’sigreturn’的系统调用，更改signal frame（这是一段代码）的一些寄存器的值做到系统调用，主要相关的寄存器有：rax（系统调用号）、rdi（存参）、rip（下一条指令）、rsp（栈顶），还有就是re_sigreturn（存sigreturn的系统调用号，32 位的 sigreturn 的调用号为 77，64 位的系统调用号为 15）</p>
+<p>偷偷搬运一下wiki里的图，这就是一个signal frame，最后执行完sigreturn之后会执行execve（‘/bin/sh’,0,0）<br><img src="/2019/09/02/srop/%E5%9B%BE%E7%89%871.png" alt></p>
+        
+          <a class="article-more-link" href="/2019/09/02/srop/">Read More...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://c0yo7e.github.io/2019/09/02/srop/" data-id="ckdjwzrne000om4swcfkpfcku"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-playfmt" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -104,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="ckdg4ibqe000o78sw2cmm1xpl"
+      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="ckdjwzrnb000lm4sw0bt771qi"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
@@ -168,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="ckdg4ibqd000m78swm45po69a"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="ckdjwzrn8000jm4sw6w2drbro"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -232,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="ckdg4ibqm000w78swxf99akqu"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="ckdjwzrnh000qm4sw2mhb5sk6"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -302,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="ckdg4ibq7000j78swgkdlwv30"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="ckdjwzrn3000im4swf4kch3vq"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -367,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="ckdg4ibp9000578swstnxbygm"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="ckdjwzrkx0000m4swqvhmbn9w"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
