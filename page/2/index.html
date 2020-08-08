@@ -59,6 +59,71 @@
       
         
 
+<article id="post-runtime-resolve" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/10/07/runtime-resolve/">runtime_resolve</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/07/runtime-resolve/" class="article-date">
+  <time datetime="2019-10-07T04:23:05.000Z" itemprop="datePublished">2019-10-07</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>做为高级rop的题目果然是令人很头疼的，这类题目是没有办法leak的（无回显），就借助_dl_runtime_resolve(link_map_obj, reloc_index)对动态链接的函数重定位</p>
+<p>控制程序执行 dl_resolve 函数<br>    给定 Link_map 以及 index 两个参数。<br>    当然我们可以直接给定 plt0 对应的汇编代码，这时，我们就只需要一个 index 就足够了。<br>控制 index 的大小，以便于指向自己所控制的区域，从而伪造一个指定的重定位表项。<br>伪造重定位表项，使得重定位表项所指的符号也在自己可以控制的范围内。<br>伪造符号内容，使得符号对应的名称也在自己可以控制的范围内。</p>
+        
+          <a class="article-more-link" href="/2019/10/07/runtime-resolve/">Read More...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://c0yo7e.github.io/2019/10/07/runtime-resolve/" data-id="ckdlmpmz1000pvgsw6xk39vb2"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-srop" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -104,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/09/02/srop/" data-id="ckdjx3log000w6cswgcdiun27"
+      <a data-url="https://c0yo7e.github.io/2019/09/02/srop/" data-id="ckdlmpmz5000svgswd8l3v7fh"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -169,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="ckdjx3lo5000p6cswyru36687"
+      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="ckdlmpmyy000ovgswn7quzfro"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
@@ -233,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="ckdjx3lo2000m6csw1ipjr8xi"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="ckdlmpmyn000kvgswi5dz3mwy"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -297,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="ckdjx3lod000u6cswvo3k6ovr"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="ckdlmpmz8000wvgswvklg9xq8"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -367,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="ckdjx3lnp000h6cswhon9vxzi"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="ckdlmpmyb000gvgswr7r7ilai"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -432,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="ckdjx3lmt00056cswemdyzurt"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="ckdlmpmw00004vgswqm2c4ff6"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
