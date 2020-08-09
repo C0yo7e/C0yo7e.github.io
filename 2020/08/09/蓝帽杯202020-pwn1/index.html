@@ -72,6 +72,7 @@
       
         <p>前两天队友们在打蓝帽杯，非警校人员只能赛后看题了</p>
 <p>只做了pwn1和pwn3（应该是这个顺序<br>两题都涉及了IO_FILE的知识点利用，刚好最近也在刷IO_FILE就做来练练手了</p>
+<!--mor-->
 <h3 id="camp-pwn1"><a href="#camp-pwn1" class="headerlink" title="camp(pwn1)"></a>camp(pwn1)</h3><p>这真的是赤裸裸考IO_FILE的题啊，完全不需要别的操作，纯往里写，就靠结构知识的感觉</p>
 <p>大概是用stdin来leak出libc的地址，然后改stderr的vtable，执行exit的时候会执行IO_flush_all_lockp</p>
 <p>跳转到vtable+0x18处执行IO_file_overflow函数<br>我们就填充fake_vtable实现调用one_gadget</p>
@@ -88,7 +89,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/09/蓝帽杯202020-pwn1/" data-id="ckdmw9ear000x90sw2n561oa9"
+      <a data-url="https://c0yo7e.github.io/2020/08/09/蓝帽杯202020-pwn1/" data-id="ckdmwbniy0011esswr2et6eax"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
