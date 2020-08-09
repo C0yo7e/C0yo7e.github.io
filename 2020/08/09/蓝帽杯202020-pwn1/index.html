@@ -7,6 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
+    蓝帽杯202020-pwn1&amp;pwn3复现 |
     
     The lair of C0yo7e</title>
   
@@ -21,111 +22,8 @@
 </html>
 <body>
 <main class="content">
-  <section class="jumbotron">
-  <div class="video">
-    
-      <div class="video-frame">
-        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-      </div>
-    
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
-             poster="/images/ocean/ocean.png" x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">The lair of C0yo7e</a></h1>
-      <p></p>
-      <div><img src="/images/time.png" class="brand" alt="The lair of C0yo7e"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
-  </div>
-</section>
-
-<div id="landingpage">
   <section class="outer">
-  <article class="articles">
-    
-    <h1 class="page-type-title"></h1>
-
-    
-      
-        
-
-<article id="post-BUU刷题集" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/02/BUU刷题集/">BUU刷题集</a>
-    </h2>
-  
-  
-  <div class="article-topping">
-    <i class="fe fe-umbrella"></i>
-  </div>
-
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/02/BUU刷题集/" class="article-date">
-  <time datetime="2020-08-02T01:02:00.000Z" itemprop="datePublished">2020-08-02</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>之前一直有说要刷buu，但一直没怎么行动，今天开始，要好好刷题了!<br>这篇blog将持续不定时更新（如果能日更就好了）<br>啊宁！冲呀！</p>
-        
-          <a class="article-more-link" href="/2020/08/02/BUU刷题集/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/02/BUU刷题集/" data-id="ckdmw9e7q000090swuy96ci8n"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
 
 <article id="post-蓝帽杯202020-pwn1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
@@ -134,9 +32,9 @@
       <header class="article-header">
         
   
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/09/蓝帽杯202020-pwn1/">蓝帽杯202020-pwn1&amp;pwn3复现</a>
-    </h2>
+    <h1 class="article-title" itemprop="name">
+      蓝帽杯202020-pwn1&amp;pwn3复现
+    </h1>
   
   
 
@@ -154,6 +52,14 @@
         
       </div>
     
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
 
     
 
@@ -192,6 +98,41 @@
   </div>
 
   
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/08/tcache浅析/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">tcache浅析</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '57453e2505e1523b1d78',
+      clientSecret: 'c9d2109f4649be7dca5ef5622d85e38608a7cd1e',
+      repo: 'content',
+      owner: 'C0yo7e',
+      admin: ['C0yo7e'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
 
   
 
@@ -199,547 +140,7 @@
 
 
 
-      
-        
-
-<article id="post-tcache浅析" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/08/tcache浅析/">tcache浅析</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/08/tcache浅析/" class="article-date">
-  <time datetime="2020-08-08T12:22:23.000Z" itemprop="datePublished">2020-08-08</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h2 id="tcache-glibc2-27"><a href="#tcache-glibc2-27" class="headerlink" title="tcache glibc2.27"></a>tcache glibc2.27</h2><p>glibc2.27版本的tcache是可以double free处理的，利用起来就很方便</p>
-<p>tcache会把之前malloc的chunk在free完之后写入tcache list里面</p>
-        
-          <a class="article-more-link" href="/2020/08/08/tcache浅析/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/08/tcache浅析/" data-id="ckdmw9eb9001290swj4xn0g8k"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-largebin-attack-glibc2-29" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/06/largebin-attack-glibc2-29/">largebin_attack-glibc2.29</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/06/largebin-attack-glibc2-29/" class="article-date">
-  <time datetime="2020-08-06T12:20:24.000Z" itemprop="datePublished">2020-08-06</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>和glibc2.23版本相比，2.29的版本对unsorted bin的检查多了很多，导致unsorted bin attack几乎不可行，所以我们用largebin attack作为它的替代</p>
-        
-          <a class="article-more-link" href="/2020/08/06/largebin-attack-glibc2-29/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/06/largebin-attack-glibc2-29/" data-id="ckdmw9ebc001490sw6t29v82h"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwm知识点/">pwm知识点</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-largebin-attack-glibc2-23" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/01/largebin-attack-glibc2-23/">largebin_attack-glibc2.23</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/01/largebin-attack-glibc2-23/" class="article-date">
-  <time datetime="2020-08-01T14:16:07.000Z" itemprop="datePublished">2020-08-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h2 id="unsortedbin-拆分smallbin和largebin："><a href="#unsortedbin-拆分smallbin和largebin：" class="headerlink" title="unsortedbin 拆分smallbin和largebin："></a>unsortedbin 拆分smallbin和largebin：</h2><p>把largebin放入large bin list里面的话得先解链，和unlink其实差不多，不过这里用到了nextsize</p>
-<p>glibc2.23   malloc/malloc.c:3470</p>
-        
-          <a class="article-more-link" href="/2020/08/01/largebin-attack-glibc2-23/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/01/largebin-attack-glibc2-23/" data-id="ckdmw9e9v000c90swkhi5u3qi"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-IO-FILE-leakaddr" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/01/IO-FILE-leakaddr/">IO_FILE-leakaddr</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/08/01/IO-FILE-leakaddr/" class="article-date">
-  <time datetime="2020-08-01T14:01:50.000Z" itemprop="datePublished">2020-08-01</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="任意读原理"><a href="#任意读原理" class="headerlink" title="任意读原理"></a>任意读原理</h3><p>stderr、stdout、stdin这三个函数拥有IO_FILE结构体，要利用IO_FILE实现任意读，就要利用到stdout。<br>首先，puts和write函数的执行，都会通过 <code>_IO_new_file_overflow</code> 这个函数最后执行 <code>_IO_overflow</code></p>
-<blockquote>
-<p><strong>puts</strong>:  <em>_IO_puts</em> –&gt; <em>_IO_sputn</em> –&gt; <em>_IO_new_file_xsputn</em> –&gt; <em>_IO_new_file_overflow</em> –&gt; <em>_IO_do_write</em> –&gt; <em>new_do_write</em> –&gt; <em>_IO_SYSWRITE</em></p>
-<p><strong>fwrite</strong>: <em>_IO_fwrite</em> –&gt; <em>_IO_sputn</em> –&gt; <em>_IO_new_file_xsputn</em> –&gt; <em>_IO_new_file_overflow</em> –&gt; <em>_IO_do_write</em> –&gt; <em>new_do_write</em> –&gt; <em>_IO_SYSWRITE</em></p>
-</blockquote>
-<p>_IO_new_file_xsputn的源码：</p>
-        
-          <a class="article-more-link" href="/2020/08/01/IO-FILE-leakaddr/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/01/IO-FILE-leakaddr/" data-id="ckdmw9ea0000f90swpst5mrbi"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-mips编译环境配置与简单栈溢出" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/05/12/mips编译环境配置与简单栈溢出/">mips编译环境配置与简单栈溢出</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/05/12/mips编译环境配置与简单栈溢出/" class="article-date">
-  <time datetime="2020-05-12T10:00:33.000Z" itemprop="datePublished">2020-05-12</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h2 id="环境编译"><a href="#环境编译" class="headerlink" title="环境编译"></a>环境编译</h2><p>首先就是搭一下编译环境，（==最好选16的ubuntu==，我曾经觉得18的Ubuntu长得好看，然后在上面搭了一天的环境之后发现，并不能动态调试，然后重新在16里又再搭了一天）</p>
-<h3 id="buildroot"><a href="#buildroot" class="headerlink" title="buildroot"></a>buildroot</h3><p>下载：<a href="https://buildroot.org/download" target="_blank" rel="noopener">buildroot</a></p>
-<p>解压之后，configs里面有一个<code>qemu_mips32r2el_malta_defconfig</code>这样的配置，可以进去找找看有没有，我们回到主目录，直接<code>make qemu_mips32r2el_malta_defconfig</code></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">coyote@ubuntu:~/buildroot<span class="number">-2020.02</span><span class="number">.1</span>$ make qemu_mips32r2el_malta_defconfig</span><br><span class="line">coyote@ubuntu:~/buildroot<span class="number">-2020.02</span><span class="number">.1</span>$ make</span><br></pre></td></tr></table></figure>
-
-<p>make qemu…那个命令就是配置相对应的环境，就不用手动<code>make menuconfig</code> 去设置了。</p>
-        
-          <a class="article-more-link" href="/2020/05/12/mips编译环境配置与简单栈溢出/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/05/12/mips编译环境配置与简单栈溢出/" data-id="ckdmw9ea8000l90swwtbro2ga"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/others/">others</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-house-of-orange" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/10/house-of-orange/">house_of_orange</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/10/house-of-orange/" class="article-date">
-  <time datetime="2020-03-10T03:44:04.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>其实之前从来没碰到house of orange的题，然后在想学io_file的时候看到有提到这个，就去了解了一下house of orange的原理。</p>
-<h3 id="对于house-of-orange操作的理解（glibc2-23）"><a href="#对于house-of-orange操作的理解（glibc2-23）" class="headerlink" title="对于house of orange操作的理解（glibc2.23）"></a>对于house of orange操作的理解（glibc2.23）</h3><p>大体上是，没有<font color="red">free</font>函数，通过<font color="red">改写top chunk</font>，使top chunk的大小不能满足我们要malloc的大小，则malloc后，原来的top chunk会被释放，并置入到unsorted bin的队列。这样就可以到达不通过free也能把chunk写到unsorted bin的队列里面的目的了。</p>
-        
-          <a class="article-more-link" href="/2020/03/10/house-of-orange/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/03/10/house-of-orange/" data-id="ckdmw9e9x000d90swgf9xwpj2"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-unlink" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/18/unlink/">unlink</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/18/unlink/" class="article-date">
-  <time datetime="2020-02-18T14:44:29.000Z" itemprop="datePublished">2020-02-18</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>把ctf wiki里的unlink题简单的做了一下<br>先简单的记录一下，以后吃透了再回来好好的填填坑</p>
-<p>理解了一下unlink的操作<br>就是构造一个chunk，例如</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x1302000</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000051</span></span><br><span class="line"><span class="number">0x1302010</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000040</span>  <span class="comment">#fack_chunk（构造成一个free掉的样子）  0x51的chunk，就在他下面构造一个刚好可以填满这个chunk的new chunk，即-0x11</span></span><br><span class="line"><span class="number">0x1302020</span>:	<span class="number">0x00000000006030d0</span>	<span class="number">0x00000000006030d8</span></span><br><span class="line"><span class="number">0x1302030</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302040</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302050</span>:	<span class="number">0x0000000000000040</span>	<span class="number">0x00000000000000a0</span>  <span class="comment">#p位改成0，free下一个chunk之后会与上一个chunk合并</span></span><br><span class="line"><span class="number">0x1302060</span>:	<span class="number">0x654420746f626f52</span>	<span class="number">0x00000000006c6976</span></span><br><span class="line"><span class="number">0x1302070</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302080</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302090</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020a0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020b0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020c0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020d0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020e0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020f0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000020f11</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-link" href="/2020/02/18/unlink/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/18/unlink/" data-id="ckdmw9eal000v90swept2ho66"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-arm的环境搭建-简单的例题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/02/07/arm的环境搭建-简单的例题/">arm的环境搭建+简单的例题</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/02/07/arm的环境搭建-简单的例题/" class="article-date">
-  <time datetime="2020-02-07T14:54:19.000Z" itemprop="datePublished">2020-02-07</time>
-</a>
-        
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>关于arm的东西我好像已经拖了将近一个月了，不能再拖下去了，先记一些吧，之后我陆续补坑看看</p>
-<h2 id="arm环境搭建"><a href="#arm环境搭建" class="headerlink" title="arm环境搭建"></a>arm环境搭建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#安装qemu</span><br><span class="line">apt-get install qemu</span><br><span class="line">#更新一下</span><br><span class="line">sudo apt-get update</span><br><span class="line">#安装32位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-arm-linux-gnueabi</span><br><span class="line">#运行32位的动态链接程序方法</span><br><span class="line">qemu-arm -L /usr/arm-linux-gnueabi ./文件</span><br><span class="line">#安装64位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu</span><br><span class="line">#运行64位的动态链接程序方法</span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu ./文件</span><br><span class="line">#安装gdb调试工具</span><br><span class="line">sudo apt-get install git gdb gdb-multiarch</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-link" href="/2020/02/07/arm的环境搭建-简单的例题/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckdmw9e97000390sw5gs3y02c"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-  </article>
-  
-
-  
-    <nav class="page-nav">
-      
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next page</a>
-    </nav>
-  
 </section>
-</div>
-
   <footer class="footer">
   <div class="outer">
     <div class="float-right">
@@ -759,8 +160,8 @@
 
 </main>
 
-  <aside class="sidebar">
-    
+<aside class="sidebar sidebar-specter">
+  
     <button class="navbar-toggle"></button>
 <nav class="navbar">
   
@@ -821,6 +222,21 @@
   <script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
 
 
 <script src="/js/ocean.js"></script>
