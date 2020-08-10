@@ -90,15 +90,17 @@
 <p>如果e-&gt;key == tcache，程序会从链表头检索chunk，如果检索到了chunk e，说明tcache中已经存在chunk e，再次释放就会触发double free。<br>这就意味着我们在2.29下就没办法用double free绕过tcache了</p>
 <p>因此绕过想绕过检测进行double free，e-&gt;key 是入手点。</p>
 <h3 id="绕过实现tcache-double-free思路"><a href="#绕过实现tcache-double-free思路" class="headerlink" title="绕过实现tcache double free思路"></a>绕过实现tcache double free思路</h3><blockquote>
-<p>如果有UAF漏洞或堆溢出，可以修改e-&gt;key为空，或者其他非tcache_perthread_struct的地址。这样可以直接绕过_int_free里面第一个if判断。不过如果UAF或堆溢出能直接修改chunk的fd的话，根本就不需要用到double free了。</p>
-<p>利用堆溢出，修改chunk的size，最差的情况至少要做到off by null。留意到_int_free里面判断当前chunk是否已存在tcache的地方，它是根据chunk的大小去查指定的tcache链，由于我们修改了chunk的size，查找tcache链时并不会找到该chunk，满足free的条件。虽然double free的chunk不在同一个tcache链中，不过不影响我们使用tcache poisoning进行攻击。</p>
+<p>利用UAF/堆溢出更改e-&gt;key,使之不等于tcache_prethread_str，可以绕过if判断</p>
+<p>利用堆溢出修改chunk的size，查找tcache链时并不会找到该chunk（不同一个tcache链中），满足free的条件。</p>
 </blockquote>
-<p>（from: <a href="https://xz.aliyun.com/t/7292#toc-2" target="_blank" rel="noopener">https://xz.aliyun.com/t/7292#toc-2</a>)</p>
 <h4 id="picoctf2019-zero-to-hero"><a href="#picoctf2019-zero-to-hero" class="headerlink" title="picoctf2019 zero_to_hero"></a>picoctf2019 zero_to_hero</h4><p>其实没有碰到过这类的题，就按着<a href="https://xz.aliyun.com/t/7292#toc-3" target="_blank" rel="noopener">师傅的blog</a>来讲一下这个通过改了size之后free到不同tcache队列实现double free的题吧</p>
 <p>首先题目友好的给出了system的地址，就不需要我们leak了，我们就只需要直接用tcache操作进行改free_hook为system，执行即可</p>
 <p>第一步先malloc两个chunk（第二个要求大于0x110）并将两个chunk free掉<br>然后malloc第一个chunk，通过off by null把第二个chunk的size 从0x1xx变成0x100<br>再free第二个chunk就可以实现double free了</p>
 <p>接下来就是常规操作了，具体操作可以看<a href="https://xz.aliyun.com/t/7292#toc-3" target="_blank" rel="noopener">师傅的blog</a></p>
-<h3 id="绕过tcache实现unsortedbin上操作"><a href="#绕过tcache实现unsortedbin上操作" class="headerlink" title="绕过tcache实现unsortedbin上操作"></a>绕过tcache实现unsortedbin上操作</h3><blockquote>
+<h3 id="绕过tcache实现unsortedbin上操作"><a href="#绕过tcache实现unsortedbin上操作" class="headerlink" title="绕过tcache实现unsortedbin上操作"></a>绕过tcache实现unsortedbin上操作</h3><p>在malloc.c的宏定义里，可以看见tcache的个数为7个</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> TCACHE_FILL_COUNT 7</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
 <p>tcache每一个大小的chunk个数上限是7，填满之后就会往unsortedbin里填，我们可以先将tcache填满之后再操作</p>
 </blockquote>
 <h4 id="ctf2019-girlfriends"><a href="#ctf2019-girlfriends" class="headerlink" title="*ctf2019 girlfriends"></a>*ctf2019 girlfriends</h4><p>这题在free的地方没清空指针，可以进行double free</p>
@@ -113,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/08/08/tcache浅析/" data-id="ckdn16syr0010koswh4on8b3h"
+      <a data-url="https://c0yo7e.github.io/2020/08/08/tcache浅析/" data-id="ckdnst4yl000tqsswd2mlyr2p"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
