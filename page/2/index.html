@@ -59,6 +59,71 @@
       
         
 
+<article id="post-arm的环境搭建-简单的例题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/07/arm的环境搭建-简单的例题/">arm的环境搭建+简单的例题</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/07/arm的环境搭建-简单的例题/" class="article-date">
+  <time datetime="2020-02-07T14:54:19.000Z" itemprop="datePublished">2020-02-07</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>关于arm的东西我好像已经拖了将近一个月了，不能再拖下去了，先记一些吧，之后我陆续补坑看看</p>
+<h2 id="arm环境搭建"><a href="#arm环境搭建" class="headerlink" title="arm环境搭建"></a>arm环境搭建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#安装qemu</span><br><span class="line">apt-get install qemu</span><br><span class="line">#更新一下</span><br><span class="line">sudo apt-get update</span><br><span class="line">#安装32位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-arm-linux-gnueabi</span><br><span class="line">#运行32位的动态链接程序方法</span><br><span class="line">qemu-arm -L /usr/arm-linux-gnueabi ./文件</span><br><span class="line">#安装64位的依赖库</span><br><span class="line">sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu</span><br><span class="line">#运行64位的动态链接程序方法</span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu ./文件</span><br><span class="line">#安装gdb调试工具</span><br><span class="line">sudo apt-get install git gdb gdb-multiarch</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-link" href="/2020/02/07/arm的环境搭建-简单的例题/">Read More...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://c0yo7e.github.io/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckdvcs3vz000bkwswognldl5h"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-fastbinin-attack" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -103,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/07/fastbinin-attack/" data-id="ckdnst4xk0005qsswea9kih8c"
+      <a data-url="https://c0yo7e.github.io/2020/02/07/fastbinin-attack/" data-id="ckdvcs3w2000dkwswd3gin52o"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -168,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/10/07/runtime-resolve/" data-id="ckdnst4yc000nqssw6wwe38w5"
+      <a data-url="https://c0yo7e.github.io/2019/10/07/runtime-resolve/" data-id="ckdvcs3wq000ukwswur6bkzgp"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -233,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/09/02/srop/" data-id="ckdnst4ye000pqsswsb63i64c"
+      <a data-url="https://c0yo7e.github.io/2019/09/02/srop/" data-id="ckdvcs3ws000xkwswxsrb9w5w"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -298,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="ckdnst4ya000lqsswlzjviit3"
+      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="ckdvcs3wo000skwswvlfl4a6r"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
@@ -362,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="ckdnst4y7000iqsswrnqm8o68"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="ckdvcs3wn000rkwswwj1vyanc"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -426,7 +491,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="ckdnst4yh000rqsswlc0ch0dw"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="ckdvcs3wu000zkwswrud7vq9w"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -496,7 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="ckdnst4y1000dqsswi0nbyggz"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="ckdvcs3wc000jkwswid1lrcyx"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -561,7 +626,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="ckdnst4wa0002qsswo95f7jn6"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="ckdvcs3vx0009kwswrecgo7lj"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
