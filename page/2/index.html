@@ -59,6 +59,72 @@
       
         
 
+<article id="post-unlink" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/02/18/unlink/">unlink</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/02/18/unlink/" class="article-date">
+  <time datetime="2020-02-18T14:44:29.000Z" itemprop="datePublished">2020-02-18</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>把ctf wiki里的unlink题简单的做了一下<br>先简单的记录一下，以后吃透了再回来好好的填填坑</p>
+<p>理解了一下unlink的操作<br>就是构造一个chunk，例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x1302000</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000051</span></span><br><span class="line"><span class="number">0x1302010</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000040</span>  <span class="comment">#fack_chunk（构造成一个free掉的样子）  0x51的chunk，就在他下面构造一个刚好可以填满这个chunk的new chunk，即-0x11</span></span><br><span class="line"><span class="number">0x1302020</span>:	<span class="number">0x00000000006030d0</span>	<span class="number">0x00000000006030d8</span></span><br><span class="line"><span class="number">0x1302030</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302040</span>:	<span class="number">0x6161616161616161</span>	<span class="number">0x6161616161616161</span></span><br><span class="line"><span class="number">0x1302050</span>:	<span class="number">0x0000000000000040</span>	<span class="number">0x00000000000000a0</span>  <span class="comment">#p位改成0，free下一个chunk之后会与上一个chunk合并</span></span><br><span class="line"><span class="number">0x1302060</span>:	<span class="number">0x654420746f626f52</span>	<span class="number">0x00000000006c6976</span></span><br><span class="line"><span class="number">0x1302070</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302080</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x1302090</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020a0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020b0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020c0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020d0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020e0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000000000</span></span><br><span class="line"><span class="number">0x13020f0</span>:	<span class="number">0x0000000000000000</span>	<span class="number">0x0000000000020f11</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-link" href="/2020/02/18/unlink/">Read More...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://c0yo7e.github.io/2020/02/18/unlink/" data-id="ckilpkexw0011t0sw5sruzrr2"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-arm的环境搭建-简单的例题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -104,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/07/arm的环境搭建-简单的例题/" data-id="cke4bja4f0008coswa54syakn"
+      <a data-url="https://c0yo7e.github.io/2020/02/07/arm的环境搭建-简单的例题/" data-id="ckilpkewi0006t0swx4ad0zt4"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -168,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2020/02/07/fastbinin-attack/" data-id="cke4bja4n000bcoswpg2sumef"
+      <a data-url="https://c0yo7e.github.io/2020/02/07/fastbinin-attack/" data-id="ckilpkewr0008t0sw75gnbe90"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -233,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/10/07/runtime-resolve/" data-id="cke4bja5g000ycosw3oog12og"
+      <a data-url="https://c0yo7e.github.io/2019/10/07/runtime-resolve/" data-id="ckilpkexk000ut0sw5ok7nalp"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -298,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/09/02/srop/" data-id="cke4bja5j0010coswg3q5aqrj"
+      <a data-url="https://c0yo7e.github.io/2019/09/02/srop/" data-id="ckilpkexl000vt0swqt1b9nfn"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -363,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="cke4bja56000rcoswak8oze6b"
+      <a data-url="https://c0yo7e.github.io/2019/08/20/playfmt/" data-id="ckilpkex9000lt0swgh2jp1gk"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
@@ -427,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="cke4bja51000mcosw1fmjfplx"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/overwrite/" data-id="ckilpkex2000it0swrynulzit"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -491,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="cke4bja5m0012coswn3dbjxlq"
+      <a data-url="https://c0yo7e.github.io/2019/08/16/ssp/" data-id="ckilpkexr000zt0swg5nzxmj9"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -561,7 +627,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="cke4bja4v000hcoswwovyqcds"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/libc-csu/" data-id="ckilpkex0000gt0swcidehd99"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn知识点/">pwn知识点</a></li></ul>
@@ -626,7 +692,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="cke4bja4b0005coswyiul4fv8"
+      <a data-url="https://c0yo7e.github.io/2019/07/08/ROP Emporium/" data-id="ckilpkewe0004t0swat4wnmeo"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/">wp</a></li></ul>
